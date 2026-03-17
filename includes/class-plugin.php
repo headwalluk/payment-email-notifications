@@ -48,6 +48,24 @@ class Plugin {
 	private ?Email_Definitions $email_definitions = null;
 
 	/**
+	 * The token engine instance.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var Token_Engine|null
+	 */
+	private ?Token_Engine $token_engine = null;
+
+	/**
+	 * The email sender instance.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var Email_Sender|null
+	 */
+	private ?Email_Sender $email_sender = null;
+
+	/**
 	 * The settings instance.
 	 *
 	 * @since 0.1.0
@@ -79,6 +97,14 @@ class Plugin {
 		$this->status_tracker->register_hooks();
 
 		$this->email_definitions = new Email_Definitions();
+		$this->token_engine      = new Token_Engine();
+
+		$this->email_sender = new Email_Sender(
+			$this->email_definitions,
+			$this->status_tracker,
+			$this->token_engine
+		);
+		$this->email_sender->register_hooks();
 
 		$this->settings = new Settings( $this->email_definitions );
 		$this->settings->register_hooks();

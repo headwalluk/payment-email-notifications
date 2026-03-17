@@ -3,7 +3,7 @@
 **Plugin:** Payment Email Notifications
 **Version:** 0.1.0
 **Last Updated:** 2026-03-17
-**Current Phase:** M5 (Cron & Email Sending)
+**Current Phase:** M6 (Admin Enhancements)
 **Overall Progress:** 0%
 
 ---
@@ -65,16 +65,16 @@ WordPress/WooCommerce plugin that sends scheduled, WooCommerce-styled emails to 
 ### M5 — Cron & Email Sending
 > The engine: hourly cron evaluates orders and sends emails.
 
-- [ ] Create `includes/class-email-sender.php`
-- [ ] Register/deregister WP-Cron schedule on activation/deactivation
-- [ ] Cron handler: iterate definitions → query matching orders → check thresholds → send
-- [ ] Use WooCommerce email system (`WC_Emails` / `WC_Email`) for styled output
-- [ ] Record sent emails in `_pen_emails_sent` order meta
-- [ ] Add `pen_email_content` filter (post-token-replacement)
-- [ ] Add `pen_email_recipient` filter
-- [ ] Add `pen_should_send_email` filter
-- [ ] Handle errors gracefully: log failures, don't block other emails
-- [ ] Add WooCommerce order note when email is sent
+- [x] Create `includes/class-email-sender.php`
+- [x] Register/deregister WP-Cron schedule on activation/deactivation
+- [x] Cron handler: iterate definitions → query matching orders → check thresholds → send
+- [x] Use WooCommerce email system (`WC_Emails` / `WC_Email`) for styled output
+- [x] Record sent emails in `_pen_emails_sent` order meta
+- [x] Add `pen_email_content` filter (post-token-replacement)
+- [x] Add `pen_email_recipient` filter
+- [x] Add `pen_should_send_email` filter
+- [x] Handle errors gracefully: log failures, don't block other emails
+- [x] Add WooCommerce order note when email is sent
 
 ### M6 — Admin Enhancements
 > Polish the admin experience.

@@ -35,6 +35,7 @@ require_once __DIR__ . '/includes/class-email-definitions.php';
 require_once __DIR__ . '/includes/class-settings.php';
 require_once __DIR__ . '/includes/class-status-tracker.php';
 require_once __DIR__ . '/includes/class-token-engine.php';
+require_once __DIR__ . '/includes/class-email-sender.php';
 
 /**
  * Declare HPOS compatibility.
@@ -83,3 +84,17 @@ add_action(
 		$pen_plugin_instance->run();
 	}
 );
+
+/**
+ * Schedule cron on activation.
+ *
+ * @since 0.1.0
+ */
+register_activation_hook( __FILE__, array( Email_Sender::class, 'schedule_cron' ) );
+
+/**
+ * Unschedule cron on deactivation.
+ *
+ * @since 0.1.0
+ */
+register_deactivation_hook( __FILE__, array( Email_Sender::class, 'unschedule_cron' ) );
