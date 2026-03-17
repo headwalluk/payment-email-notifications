@@ -3,7 +3,7 @@
 **Plugin:** Payment Email Notifications
 **Version:** 0.1.0
 **Last Updated:** 2026-03-17
-**Current Phase:** M1 (Plugin Scaffold)
+**Current Phase:** M2 (Order Status Tracking)
 **Overall Progress:** 0%
 
 ---
@@ -26,12 +26,12 @@ WordPress/WooCommerce plugin that sends scheduled, WooCommerce-styled emails to 
 ### M1 — Plugin Scaffold & Infrastructure
 > Get the plugin loading, WooCommerce dependency check, constants, and file structure in place.
 
-- [ ] Create main plugin file with headers, WC dependency check, HPOS declaration
-- [ ] Create `constants.php` with option keys, meta keys, default values
-- [ ] Create `functions-private.php`
-- [ ] Create `includes/class-plugin.php` — main orchestrator with hook registration
-- [ ] Set up `phpcs.xml` configuration
-- [ ] Verify plugin activates cleanly and appears in WP admin
+- [x] Create main plugin file with headers, WC dependency check, HPOS declaration
+- [x] Create `constants.php` with option keys, meta keys, default values
+- [x] Create `functions-private.php`
+- [x] Create `includes/class-plugin.php` — main orchestrator with hook registration
+- [x] Set up `phpcs.xml` configuration
+- [x] Verify plugin activates cleanly and appears in WP admin
 
 ### M2 — Order Status Tracking
 > Track when orders change status so we can calculate "days at current status".
