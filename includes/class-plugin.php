@@ -39,6 +39,24 @@ class Plugin {
 	private ?Status_Tracker $status_tracker = null;
 
 	/**
+	 * The email definitions instance.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var Email_Definitions|null
+	 */
+	private ?Email_Definitions $email_definitions = null;
+
+	/**
+	 * The settings instance.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var Settings|null
+	 */
+	private ?Settings $settings = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1.0
@@ -60,6 +78,11 @@ class Plugin {
 		$this->status_tracker = new Status_Tracker();
 		$this->status_tracker->register_hooks();
 
+		$this->email_definitions = new Email_Definitions();
+
+		$this->settings = new Settings( $this->email_definitions );
+		$this->settings->register_hooks();
+
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 	}
 
@@ -72,6 +95,17 @@ class Plugin {
 	 */
 	public function get_status_tracker(): ?Status_Tracker {
 		return $this->status_tracker;
+	}
+
+	/**
+	 * Get the email definitions instance.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return Email_Definitions|null
+	 */
+	public function get_email_definitions(): ?Email_Definitions {
+		return $this->email_definitions;
 	}
 
 	/**
@@ -121,22 +155,7 @@ class Plugin {
 			__( 'Payment Emails', 'payment-email-notifications' ),
 			CAPABILITY,
 			ADMIN_PAGE_SLUG,
-			array( $this, 'render_admin_page' )
-		);
-	}
-
-	/**
-	 * Render the admin page.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return void
-	 */
-	public function render_admin_page(): void {
-		printf(
-			'<div class="wrap"><h1>%s</h1><p>%s</p></div>',
-			esc_html__( 'Payment Email Notifications', 'payment-email-notifications' ),
-			esc_html__( 'Email definitions will be managed here.', 'payment-email-notifications' )
+			array( $this->settings, 'render_page' )
 		);
 	}
 }

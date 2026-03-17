@@ -3,7 +3,7 @@
 **Plugin:** Payment Email Notifications
 **Version:** 0.1.0
 **Last Updated:** 2026-03-17
-**Current Phase:** M3 (Email Definitions CRUD)
+**Current Phase:** M4 (Token Engine)
 **Overall Progress:** 0%
 
 ---
@@ -45,13 +45,13 @@ WordPress/WooCommerce plugin that sends scheduled, WooCommerce-styled emails to 
 ### M3 — Email Definitions CRUD
 > Admin UI for creating, editing, enabling/disabling, and deleting email definitions.
 
-- [ ] Create `includes/class-email-definitions.php` — get, save, delete definitions
-- [ ] Create `includes/class-settings.php` — admin page under WooCommerce menu
-- [ ] Admin list view: table of all definitions with status, days, enabled toggle
-- [ ] Admin add/edit form: label, subject, body (textarea), target status, days threshold, enabled
-- [ ] Nonce verification, capability checks, input sanitization on all saves
-- [ ] Create admin-templates for list and edit views
-- [ ] Enqueue minimal admin CSS for the settings pages
+- [x] Create `includes/class-email-definitions.php` — get, save, delete definitions
+- [x] Create `includes/class-settings.php` — admin page under WooCommerce menu
+- [x] Admin list view: table of all definitions with status, days, enabled toggle
+- [x] Admin add/edit form: label, subject, body (textarea), target status, days threshold, enabled
+- [x] Nonce verification, capability checks, input sanitization on all saves
+- [x] Create admin-templates for list and edit views
+- [x] Enqueue minimal admin CSS for the settings pages
 
 ### M4 — Token Engine
 > Template substitution system for email subject and body.

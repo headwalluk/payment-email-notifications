@@ -1,0 +1,28 @@
+/**
+ * Payment Email Notifications - Admin styles.
+ *
+ * @since 0.1.0
+ */
+
+.pen-empty-state {
+	text-align: center;
+	padding: 40px 20px;
+}
+
+.pen-status {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 3px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.pen-status-enabled {
+	background: #d4edda;
+	color: #155724;
+}
+
+.pen-status-disabled {
+	background: #f8d7da;
+	color: #721c24;
+}
