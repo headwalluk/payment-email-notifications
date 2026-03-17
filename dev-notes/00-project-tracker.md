@@ -3,7 +3,7 @@
 **Plugin:** Payment Email Notifications
 **Version:** 0.1.0
 **Last Updated:** 2026-03-17
-**Current Phase:** M2 (Order Status Tracking)
+**Current Phase:** M3 (Email Definitions CRUD)
 **Overall Progress:** 0%
 
 ---
@@ -36,11 +36,11 @@ WordPress/WooCommerce plugin that sends scheduled, WooCommerce-styled emails to 
 ### M2 — Order Status Tracking
 > Track when orders change status so we can calculate "days at current status".
 
-- [ ] Create `includes/class-status-tracker.php`
-- [ ] Hook into `woocommerce_order_status_changed` to record `_pen_status_changed_at` order meta
-- [ ] Clear `_pen_emails_sent` meta on status change (reset sent log for new status)
-- [ ] Add helper method: get days at current status for an order
-- [ ] Handle edge case: orders already at a status when plugin is first activated (backfill or graceful handling)
+- [x] Create `includes/class-status-tracker.php`
+- [x] Hook into `woocommerce_order_status_changed` to record `_pen_status_changed_at` order meta
+- [x] Clear `_pen_emails_sent` meta on status change (reset sent log for new status)
+- [x] Add helper method: get days at current status for an order
+- [x] Handle edge case: orders already at a status when plugin is first activated (returns null — graceful skip)
 
 ### M3 — Email Definitions CRUD
 > Admin UI for creating, editing, enabling/disabling, and deleting email definitions.

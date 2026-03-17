@@ -24,6 +24,7 @@
 	<!-- Rules -->
 	<rule ref="WordPress">
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
 	</rule>
 
 	<!-- Prefixes -->

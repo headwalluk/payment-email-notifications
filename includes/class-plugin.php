@@ -30,6 +30,15 @@ class Plugin {
 	private string $plugin_file;
 
 	/**
+	 * The status tracker instance.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var Status_Tracker|null
+	 */
+	private ?Status_Tracker $status_tracker = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1.0
@@ -48,7 +57,21 @@ class Plugin {
 	 * @return void
 	 */
 	public function run(): void {
+		$this->status_tracker = new Status_Tracker();
+		$this->status_tracker->register_hooks();
+
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
+	}
+
+	/**
+	 * Get the status tracker instance.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return Status_Tracker|null
+	 */
+	public function get_status_tracker(): ?Status_Tracker {
+		return $this->status_tracker;
 	}
 
 	/**

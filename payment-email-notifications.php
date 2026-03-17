@@ -31,6 +31,7 @@ require_once __DIR__ . '/functions-private.php';
 
 // Core classes.
 require_once __DIR__ . '/includes/class-plugin.php';
+require_once __DIR__ . '/includes/class-status-tracker.php';
 
 /**
  * Declare HPOS compatibility.
