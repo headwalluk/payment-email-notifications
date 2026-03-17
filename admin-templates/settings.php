@@ -20,7 +20,7 @@ printf( '<div class="wrap">' );
 
 printf( '<h1>%s</h1>', esc_html__( 'Order Status Emails', 'payment-email-notifications' ) );
 
-include PEN_PLUGIN_DIR . 'admin-templates/tab-navigation.php';
+require PEN_PLUGIN_DIR . 'admin-templates/tab-navigation.php';
 
 // phpcs:disable WordPress.Security.NonceVerification.Recommended -- Read-only display check.
 if ( isset( $_GET['updated'] ) ) {

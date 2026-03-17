@@ -4,7 +4,7 @@ Tags: woocommerce, email, notifications, payment, reminders
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,9 @@ Yes. Go to the Settings tab and add your order or customer meta keys (one per li
 Yes. Each email definition has its own subject and body with support for template tokens like `{{customer.first_name}}` and `{{order.total}}`. Developers can also use filters for advanced customisation.
 
 == Changelog ==
+
+= 0.2.1 =
+* Added GitHub Actions release workflow for automated zip builds on version tags
 
 = 0.2.0 =
 * Added admin tab navigation (Emails / Settings tabs)

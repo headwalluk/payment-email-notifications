@@ -158,11 +158,11 @@ class Settings {
 		}
 
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- Nonce verified above.
-		$definition_id = isset( $_POST['pen_definition_id'] ) ? sanitize_text_field( wp_unslash( $_POST['pen_definition_id'] ) ) : '';
-		$label         = isset( $_POST['pen_label'] ) ? sanitize_text_field( wp_unslash( $_POST['pen_label'] ) ) : '';
-		$subject       = isset( $_POST['pen_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['pen_subject'] ) ) : '';
-		$body          = isset( $_POST['pen_body'] ) ? sanitize_textarea_field( wp_unslash( $_POST['pen_body'] ) ) : '';
-		$status        = isset( $_POST['pen_status'] ) ? sanitize_text_field( wp_unslash( $_POST['pen_status'] ) ) : '';
+		$definition_id    = isset( $_POST['pen_definition_id'] ) ? sanitize_text_field( wp_unslash( $_POST['pen_definition_id'] ) ) : '';
+		$label            = isset( $_POST['pen_label'] ) ? sanitize_text_field( wp_unslash( $_POST['pen_label'] ) ) : '';
+		$subject          = isset( $_POST['pen_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['pen_subject'] ) ) : '';
+		$body             = isset( $_POST['pen_body'] ) ? sanitize_textarea_field( wp_unslash( $_POST['pen_body'] ) ) : '';
+		$status           = isset( $_POST['pen_status'] ) ? sanitize_text_field( wp_unslash( $_POST['pen_status'] ) ) : '';
 		$days             = isset( $_POST['pen_days'] ) ? absint( $_POST['pen_days'] ) : 0;
 		$enabled          = isset( $_POST['pen_enabled'] );
 		$recipient        = isset( $_POST['pen_recipient'] ) ? sanitize_text_field( wp_unslash( $_POST['pen_recipient'] ) ) : RECIPIENT_CUSTOMER;

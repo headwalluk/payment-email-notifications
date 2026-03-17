@@ -97,5 +97,6 @@ payment-email-notifications/
 ## Development Workflow
 
 - Project tracker: `dev-notes/00-project-tracker.md`
+- `phpcs` and `phpcbf` are installed globally (run as `phpcs` / `phpcbf`, not via vendor/bin)
 - Run `phpcs` before committing
 - Commit message format: `type: description` (feat/fix/chore/refactor/docs/style/test)

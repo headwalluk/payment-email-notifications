@@ -1,7 +1,7 @@
 # Project Tracker
 
 **Plugin:** Payment Email Notifications
-**Version:** 0.2.0
+**Version:** 0.2.1
 **Last Updated:** 2026-03-17
 **Current Phase:** M6 (Admin Enhancements)
 **Overall Progress:** 80%

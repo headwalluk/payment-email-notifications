@@ -32,7 +32,7 @@ printf(
 );
 
 $current_tab = 'emails';
-include PEN_PLUGIN_DIR . 'admin-templates/tab-navigation.php';
+require PEN_PLUGIN_DIR . 'admin-templates/tab-navigation.php';
 
 printf( '<hr class="wp-header-end">' );
 

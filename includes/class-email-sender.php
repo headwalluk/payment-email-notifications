@@ -219,7 +219,7 @@ class Email_Sender {
 		$body = nl2br( $body );
 
 		// Render tokens.
-		$subject = $this->token_engine->render( $subject, $order );
+		$subject   = $this->token_engine->render( $subject, $order );
 		$body_html = $this->token_engine->render( $body, $order );
 
 		$recipient = $this->resolve_recipient( $definition, $order );

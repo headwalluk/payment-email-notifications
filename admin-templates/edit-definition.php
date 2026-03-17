@@ -29,7 +29,7 @@ printf( '<div class="wrap">' );
 printf( '<h1>%s</h1>', esc_html( $page_title ) );
 
 $current_tab = 'emails';
-include PEN_PLUGIN_DIR . 'admin-templates/tab-navigation.php';
+require PEN_PLUGIN_DIR . 'admin-templates/tab-navigation.php';
 
 printf(
 	'<form method="post" action="%s">',
