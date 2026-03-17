@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 - Email definitions CRUD with wp_options storage
 - Admin settings page under WooCommerce menu (list view, add/edit form)
 - Admin CSS for settings pages
+- Token engine with {{customer.*}}, {{order.*}}, {{site.*}} substitution
+- {{order.items}} renders WooCommerce-styled line items table
+- `pen_email_tokens` filter for adding custom tokens
+- Collapsible token reference in admin edit form
 - Order status change tracking with `_pen_status_changed_at` order meta
 - Sent email log per order with `_pen_emails_sent` order meta (cleared on status change)
 - Helper methods: days at current status, has-email-been-sent, record-email-sent

@@ -26,3 +26,18 @@
 	background: #f8d7da;
 	color: #721c24;
 }
+
+.pen-token-reference {
+	margin-top: 8px;
+}
+
+.pen-token-reference summary {
+	cursor: pointer;
+	color: #2271b1;
+	font-weight: 600;
+}
+
+.pen-token-reference p {
+	margin-top: 8px;
+	line-height: 2;
+}

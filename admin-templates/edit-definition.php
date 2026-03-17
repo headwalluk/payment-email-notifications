@@ -115,10 +115,30 @@ printf(
 	'<th><label for="pen_body">%s</label></th>',
 	esc_html__( 'Email Body', 'payment-email-notifications' )
 );
+$token_engine    = new Token_Engine();
+$token_reference = $token_engine->get_token_reference();
+$token_list      = '';
+
+foreach ( $token_reference as $token_name => $token_desc ) {
+	$token_list .= sprintf(
+		'<code>{{%s}}</code> — %s<br>',
+		esc_html( $token_name ),
+		esc_html( $token_desc )
+	);
+}
+
 printf(
-	'<td><textarea name="pen_body" id="pen_body" rows="12" class="large-text">%s</textarea><p class="description">%s</p></td>',
+	'<td><textarea name="pen_body" id="pen_body" rows="12" class="large-text">%s</textarea><p class="description">%s</p><details class="pen-token-reference"><summary>%s</summary><p>%s</p></details></td>',
 	esc_textarea( $definition['body'] ),
-	esc_html__( 'Plain text with tokens. Line breaks will be preserved. Supports {{customer.first_name}}, {{order.id}}, {{order.total}}, {{order.items}}, etc.', 'payment-email-notifications' )
+	esc_html__( 'Plain text with tokens. Line breaks will be preserved in the email.', 'payment-email-notifications' ),
+	esc_html__( 'Available tokens', 'payment-email-notifications' ),
+	wp_kses(
+		$token_list,
+		[
+			'code' => [],
+			'br'   => [],
+		]
+	)
 );
 printf( '</tr>' );
 

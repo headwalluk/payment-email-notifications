@@ -3,7 +3,7 @@
 **Plugin:** Payment Email Notifications
 **Version:** 0.1.0
 **Last Updated:** 2026-03-17
-**Current Phase:** M4 (Token Engine)
+**Current Phase:** M5 (Cron & Email Sending)
 **Overall Progress:** 0%
 
 ---
@@ -56,11 +56,11 @@ WordPress/WooCommerce plugin that sends scheduled, WooCommerce-styled emails to 
 ### M4 — Token Engine
 > Template substitution system for email subject and body.
 
-- [ ] Create `includes/class-token-engine.php`
-- [ ] Implement core tokens: `customer.*`, `order.*`, `site.*`
-- [ ] Implement `{{order.items}}` — render WooCommerce-styled line items table
-- [ ] Add `pen_email_tokens` filter for extensibility
-- [ ] Token reference display in admin edit form (list of available tokens)
+- [x] Create `includes/class-token-engine.php`
+- [x] Implement core tokens: `customer.*`, `order.*`, `site.*`
+- [x] Implement `{{order.items}}` — render WooCommerce-styled line items table
+- [x] Add `pen_email_tokens` filter for extensibility
+- [x] Token reference display in admin edit form (collapsible list of available tokens)
 
 ### M5 — Cron & Email Sending
 > The engine: hourly cron evaluates orders and sends emails.

@@ -34,6 +34,7 @@ require_once __DIR__ . '/includes/class-plugin.php';
 require_once __DIR__ . '/includes/class-email-definitions.php';
 require_once __DIR__ . '/includes/class-settings.php';
 require_once __DIR__ . '/includes/class-status-tracker.php';
+require_once __DIR__ . '/includes/class-token-engine.php';
 
 /**
  * Declare HPOS compatibility.
