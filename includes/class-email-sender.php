@@ -71,17 +71,6 @@ class Email_Sender {
 	}
 
 	/**
-	 * Register hooks.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return void
-	 */
-	public function register_hooks(): void {
-		add_action( CRON_HOOK, array( $this, 'process_emails' ) );
-	}
-
-	/**
 	 * Schedule the cron event on plugin activation.
 	 *
 	 * @since 0.1.0
@@ -225,9 +214,15 @@ class Email_Sender {
 		$subject = isset( $definition['subject'] ) ? $definition['subject'] : '';
 		$body    = isset( $definition['body'] ) ? $definition['body'] : '';
 
+		// Convert plain-text line breaks before token substitution so that
+		// HTML tokens (e.g. {{order.items}}) are not mangled by nl2br().
+		$body = nl2br( $body );
+
 		// Render tokens.
 		$subject = $this->token_engine->render( $subject, $order );
-		$body    = $this->token_engine->render( $body, $order );
+		$body_html = $this->token_engine->render( $body, $order );
+
+		$recipient = $this->resolve_recipient( $definition, $order );
 
 		/**
 		 * Filter the rendered email recipient.
@@ -239,10 +234,7 @@ class Email_Sender {
 		 * @param array<string, mixed>  $definition    The email definition data.
 		 * @param \WC_Order             $order         The WooCommerce order.
 		 */
-		$recipient = apply_filters( 'pen_email_recipient', $order->get_billing_email(), $definition_id, $definition, $order );
-
-		// Convert line breaks to HTML and wrap in WooCommerce email template.
-		$body_html = nl2br( $body );
+		$recipient = apply_filters( 'pen_email_recipient', $recipient, $definition_id, $definition, $order );
 
 		/**
 		 * Filter the rendered email content before sending.
@@ -290,6 +282,66 @@ class Email_Sender {
 				)
 			);
 		}
+	}
+
+	/**
+	 * Resolve the recipient email address for a definition and order.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array<string, mixed> $definition The definition data.
+	 * @param \WC_Order            $order      The WooCommerce order.
+	 *
+	 * @return string The resolved email address.
+	 */
+	private function resolve_recipient( array $definition, \WC_Order $order ): string {
+		$recipient_type = isset( $definition['recipient'] ) ? $definition['recipient'] : RECIPIENT_CUSTOMER;
+		$result         = $order->get_billing_email();
+
+		if ( RECIPIENT_ADMIN === $recipient_type ) {
+			$result = get_option( 'admin_email' );
+		}
+
+		if ( RECIPIENT_CUSTOM === $recipient_type && ! empty( $definition['recipient_custom'] ) ) {
+			$result = $definition['recipient_custom'];
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Send a test email for a definition using a given order.
+	 *
+	 * Does not record the email as sent or add order notes.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array<string, mixed> $definition The definition data.
+	 * @param \WC_Order            $order      The WooCommerce order.
+	 * @param string               $recipient  The test recipient email address.
+	 *
+	 * @return bool True on success.
+	 */
+	public function send_test_email( array $definition, \WC_Order $order, string $recipient ): bool {
+		$subject = isset( $definition['subject'] ) ? $definition['subject'] : '';
+		$body    = isset( $definition['body'] ) ? $definition['body'] : '';
+
+		// Convert plain-text line breaks before token substitution so that
+		// HTML tokens (e.g. {{order.items}}) are not mangled by nl2br().
+		$body = nl2br( $body );
+
+		$subject   = $this->token_engine->render( $subject, $order );
+		$body_html = $this->token_engine->render( $body, $order );
+
+		/** This filter is documented in includes/class-email-sender.php */
+		$body_html = apply_filters( 'pen_email_content', $body_html, 'test', $definition, $order );
+
+		$wrapped_body = $this->wrap_in_wc_email_template( $body_html, $subject );
+
+		$mailer = WC()->mailer();
+		$result = $mailer->send( $recipient, $subject, $wrapped_body );
+
+		return (bool) $result;
 	}
 
 	/**

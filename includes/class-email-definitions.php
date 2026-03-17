@@ -158,12 +158,14 @@ class Email_Definitions {
 	 */
 	public function get_defaults(): array {
 		return [
-			'label'   => '',
-			'subject' => '',
-			'body'    => '',
-			'status'  => '',
-			'days'    => 0,
-			'enabled' => false,
+			'label'            => '',
+			'subject'          => '',
+			'body'             => '',
+			'status'           => '',
+			'days'             => 0,
+			'enabled'          => false,
+			'recipient'        => RECIPIENT_CUSTOMER,
+			'recipient_custom' => '',
 		];
 	}
 }

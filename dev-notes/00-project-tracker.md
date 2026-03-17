@@ -1,7 +1,7 @@
 # Project Tracker
 
 **Plugin:** Payment Email Notifications
-**Version:** 0.1.0
+**Version:** 0.2.0
 **Last Updated:** 2026-03-17
 **Current Phase:** M6 (Admin Enhancements)
 **Overall Progress:** 0%
@@ -79,10 +79,15 @@ WordPress/WooCommerce plugin that sends scheduled, WooCommerce-styled emails to 
 ### M6 — Admin Enhancements
 > Polish the admin experience.
 
-- [ ] Email preview/test send from admin (send to admin email with sample data)
+- [x] Recipient type per definition: customer billing email, site admin email, or custom address
+- [x] Test email send from admin: "Test" button on list view prompts for recipient, sends using most recent order
+- [x] Admin tab navigation (Emails / Settings tabs)
+- [x] Custom meta tokens: configurable order & customer meta keys via Settings tab (`{{order.meta.KEY}}`, `{{customer.meta.KEY}}`)
 - [ ] Sent email log viewer per order (meta box on order edit screen)
 - [ ] Inline help text / tooltips on settings page
 - [ ] Admin notice if no email definitions are configured
+
+> **Note:** Meta key settings UI may be extended later with ACF integration.
 
 ### M7 — Final Testing & Release
 > Get the plugin ready for v1.0.0.

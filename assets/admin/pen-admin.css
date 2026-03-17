@@ -27,17 +27,64 @@
 	color: #721c24;
 }
 
-.pen-token-reference {
-	margin-top: 8px;
+.pen-token-pills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
 }
 
-.pen-token-reference summary {
+.pen-token-pill {
+	position: relative;
+	display: inline-block;
+	padding: 4px 10px;
+	border: 1px solid #c3c4c7;
+	border-radius: 12px;
+	background: #f0f0f1;
+	color: #2c3338;
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+	line-height: 1.4;
 	cursor: pointer;
-	color: #2271b1;
-	font-weight: 600;
+	transition: background-color 0.15s, border-color 0.15s;
 }
 
-.pen-token-reference p {
-	margin-top: 8px;
-	line-height: 2;
+.pen-token-pill:hover {
+	background: #dcdcde;
+	border-color: #8c8f94;
+}
+
+.pen-token-pill:focus {
+	outline: 1px solid #2271b1;
+	outline-offset: 1px;
+}
+
+.pen-token-pill .pen-copied-tooltip {
+	position: absolute;
+	bottom: calc(100% + 6px);
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 4px 8px;
+	border-radius: 3px;
+	background: #1d2327;
+	color: #fff;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-size: 11px;
+	white-space: nowrap;
+	pointer-events: none;
+	animation: pen-fade-out 1.5s ease forwards;
+}
+
+.pen-token-pill .pen-copied-tooltip::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	border: 4px solid transparent;
+	border-top-color: #1d2327;
+}
+
+@keyframes pen-fade-out {
+	0%, 60% { opacity: 1; }
+	100% { opacity: 0; }
 }

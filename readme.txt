@@ -4,7 +4,7 @@ Tags: woocommerce, email, notifications, payment, reminders
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 1.0.0
+Stable tag: 0.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,6 +24,9 @@ Payment Email Notifications lets you create time-based email workflows triggered
 
 * Simple admin interface to create and manage email definitions
 * Token substitution for personalised emails (customer name, order details, line items)
+* Custom meta tokens — reference any order or customer meta field as `{{order.meta.KEY}}` or `{{customer.meta.KEY}}`
+* Configurable recipient per email: customer, site admin, or custom address
+* Test email sending from the admin list view
 * Emails styled using the WooCommerce email template system
 * Hourly cron ensures emails are sent on schedule
 * Developer-friendly with filters for customisation
@@ -55,5 +58,13 @@ Yes. Each email definition has its own subject and body with support for templat
 
 == Changelog ==
 
-= 1.0.0 =
-* Initial release
+= 0.2.0 =
+* Added admin tab navigation (Emails / Settings tabs)
+* Added configurable custom meta tokens via Settings tab
+* Added `{{order.meta.KEY}}` and `{{customer.meta.KEY}}` token syntax
+* Added per-definition recipient type: customer billing email, site admin, or custom address
+* Added test email sending from admin list view
+* Added admin JS for token pill clipboard copy and test email AJAX
+
+= 0.1.0 =
+* Initial release — plugin scaffold, status tracking, email definitions CRUD, token engine, cron sending

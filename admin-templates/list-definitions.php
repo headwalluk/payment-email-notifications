@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || die();
 
 printf( '<div class="wrap">' );
 
-printf( '<h1 class="wp-heading-inline">%s</h1>', esc_html__( 'Payment Email Notifications', 'payment-email-notifications' ) );
+printf( '<h1 class="wp-heading-inline">%s</h1>', esc_html__( 'Order Status Emails', 'payment-email-notifications' ) );
 
 printf(
 	'<a href="%s" class="page-title-action">%s</a>',
@@ -30,6 +30,9 @@ printf(
 	),
 	esc_html__( 'Add New', 'payment-email-notifications' )
 );
+
+$current_tab = 'emails';
+include PEN_PLUGIN_DIR . 'admin-templates/tab-navigation.php';
 
 printf( '<hr class="wp-header-end">' );
 
@@ -116,9 +119,11 @@ if ( empty( $definitions ) ) {
 		);
 
 		printf(
-			'<td><a href="%s" class="button button-small">%s</a></td>',
+			'<td><a href="%s" class="button button-small">%s</a> <button type="button" class="button button-small pen-test-email" data-definition-id="%s">%s</button></td>',
 			esc_url( $edit_url ),
-			esc_html__( 'Edit', 'payment-email-notifications' )
+			esc_html__( 'Edit', 'payment-email-notifications' ),
+			esc_attr( $id ),
+			esc_html__( 'Test', 'payment-email-notifications' )
 		);
 
 		printf( '</tr>' );

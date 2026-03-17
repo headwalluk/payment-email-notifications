@@ -89,6 +89,27 @@ class Token_Engine {
 		$tokens['site.name'] = get_bloginfo( 'name' );
 		$tokens['site.url']  = home_url();
 
+		// Configured order meta tokens.
+		$order_meta_keys = $this->get_configured_meta_keys( OPT_ORDER_META_KEYS );
+
+		foreach ( $order_meta_keys as $key ) {
+			$tokens[ 'order.meta.' . $key ] = (string) $order->get_meta( $key );
+		}
+
+		// Configured customer meta tokens.
+		$customer_meta_keys = $this->get_configured_meta_keys( OPT_CUSTOMER_META_KEYS );
+		$customer_id        = $order->get_customer_id();
+
+		foreach ( $customer_meta_keys as $key ) {
+			$value = '';
+
+			if ( $customer_id > 0 ) {
+				$value = (string) get_user_meta( $customer_id, $key, true );
+			}
+
+			$tokens[ 'customer.meta.' . $key ] = $value;
+		}
+
 		return $tokens;
 	}
 
@@ -107,28 +128,16 @@ class Token_Engine {
 		ob_start();
 
 		wc_get_template(
-			'emails/email-order-items.php',
+			'emails/email-order-details.php',
 			[
-				'order'               => $order,
-				'items'               => $order->get_items(),
-				'show_sku'            => false,
-				'show_image'          => false,
-				'image_size'          => [],
-				'plain_text'          => false,
-				'sent_to_admin'       => false,
-				'show_download_links' => false,
+				'order'         => $order,
+				'sent_to_admin' => false,
+				'plain_text'    => false,
+				'email'         => '',
 			]
 		);
 
-		$items_html = ob_get_clean();
-
-		$result = sprintf(
-			'<table cellspacing="0" cellpadding="6" border="1" style="width:100%%;border-collapse:collapse;border:1px solid #e5e5e5;"><thead><tr><th style="text-align:left;border:1px solid #e5e5e5;padding:12px;">%s</th><th style="text-align:left;border:1px solid #e5e5e5;padding:12px;">%s</th><th style="text-align:left;border:1px solid #e5e5e5;padding:12px;">%s</th></tr></thead><tbody>%s</tbody></table>',
-			esc_html__( 'Product', 'payment-email-notifications' ),
-			esc_html__( 'Quantity', 'payment-email-notifications' ),
-			esc_html__( 'Price', 'payment-email-notifications' ),
-			$items_html
-		);
+		$result = ob_get_clean();
 
 		return $result;
 	}
@@ -143,7 +152,7 @@ class Token_Engine {
 	 * @return array<string, string> Token name => description.
 	 */
 	public function get_token_reference(): array {
-		return [
+		$reference = [
 			'customer.first_name'  => __( 'Customer first name', 'payment-email-notifications' ),
 			'customer.last_name'   => __( 'Customer last name', 'payment-email-notifications' ),
 			'customer.full_name'   => __( 'Customer full name', 'payment-email-notifications' ),
@@ -157,5 +166,49 @@ class Token_Engine {
 			'site.name'            => __( 'Site name', 'payment-email-notifications' ),
 			'site.url'             => __( 'Site URL', 'payment-email-notifications' ),
 		];
+
+		// Configured order meta tokens.
+		$order_meta_keys = $this->get_configured_meta_keys( OPT_ORDER_META_KEYS );
+
+		foreach ( $order_meta_keys as $key ) {
+			/* translators: %s: meta key name. */
+			$reference[ 'order.meta.' . $key ] = sprintf( __( 'Order meta: %s', 'payment-email-notifications' ), $key );
+		}
+
+		// Configured customer meta tokens.
+		$customer_meta_keys = $this->get_configured_meta_keys( OPT_CUSTOMER_META_KEYS );
+
+		foreach ( $customer_meta_keys as $key ) {
+			/* translators: %s: meta key name. */
+			$reference[ 'customer.meta.' . $key ] = sprintf( __( 'Customer meta: %s', 'payment-email-notifications' ), $key );
+		}
+
+		return $reference;
+	}
+
+	/**
+	 * Get configured meta keys from an option.
+	 *
+	 * Reads the option value, splits by newline, trims whitespace,
+	 * and filters out empty values.
+	 *
+	 * @since 0.2.0
+	 *
+	 * @param string $option_key The option key to read.
+	 *
+	 * @return array<int, string> List of meta keys.
+	 */
+	private function get_configured_meta_keys( string $option_key ): array {
+		$raw = get_option( $option_key, '' );
+
+		if ( empty( $raw ) ) {
+			return [];
+		}
+
+		$keys = explode( "\n", $raw );
+		$keys = array_map( 'trim', $keys );
+		$keys = array_filter( $keys );
+
+		return array_values( $keys );
 	}
 }

@@ -4,11 +4,23 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-03-17
+
 ### Added
-- Initial project structure and development roadmap
+- Admin tab navigation with Emails and Settings tabs
+- Settings tab with configurable order and customer meta keys
+- Custom meta tokens: `{{order.meta.KEY}}` and `{{customer.meta.KEY}}` syntax
+- Meta token pills auto-appear in edit form when keys are configured
+- Per-definition recipient type: customer billing email, site admin email, or custom address
+- Test email sending from admin list view (uses most recent order as sample data)
+- Admin JS for token pill clipboard copy and test email AJAX
+
+## [0.1.0] - 2026-03-17
+
+### Added
 - Plugin scaffold: main plugin file, constants, Plugin class, HPOS declaration
 - WooCommerce dependency check with admin notice
-- Admin menu item under WooCommerce (placeholder page)
+- Admin menu item under WooCommerce
 - PHPCS configuration with WordPress coding standards
 - Email definitions CRUD with wp_options storage
 - Admin settings page under WooCommerce menu (list view, add/edit form)

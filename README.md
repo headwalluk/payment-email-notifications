@@ -16,8 +16,11 @@ Send scheduled, WooCommerce-styled emails to customers based on how long an orde
 ## How It Works
 
 1. **Define emails** in the admin: pick a target order status, set a "days at status" threshold, and write the email content
-2. **Token substitution** lets you personalise emails with customer names, order details, and line item tables
-3. **Hourly cron** checks all orders and sends emails when conditions are met — each email is only sent once per status period
+2. **Token substitution** lets you personalise emails with customer names, order details, line item tables, and custom meta fields
+3. **Custom meta tokens** — configure order and customer meta keys in the Settings tab to use `{{order.meta.KEY}}` and `{{customer.meta.KEY}}` in templates
+4. **Flexible recipients** — send to the customer, the site admin, or a custom email address per definition
+5. **Test emails** — send a test email from the admin list view using the most recent order as sample data
+6. **Hourly cron** checks all orders and sends emails when conditions are met — each email is only sent once per status period
 
 ## Requirements
 

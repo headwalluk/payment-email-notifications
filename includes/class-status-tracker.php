@@ -25,17 +25,6 @@ defined( 'ABSPATH' ) || die();
 class Status_Tracker {
 
 	/**
-	 * Register hooks.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return void
-	 */
-	public function register_hooks(): void {
-		add_action( 'woocommerce_order_status_changed', array( $this, 'on_status_changed' ), 10, 1 );
-	}
-
-	/**
 	 * Handle order status change.
 	 *
 	 * Records the current timestamp and clears the sent emails log

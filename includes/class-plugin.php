@@ -21,15 +21,6 @@ defined( 'ABSPATH' ) || die();
 class Plugin {
 
 	/**
-	 * The plugin file path.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var string
-	 */
-	private string $plugin_file;
-
-	/**
 	 * The status tracker instance.
 	 *
 	 * @since 0.1.0
@@ -75,41 +66,18 @@ class Plugin {
 	private ?Settings $settings = null;
 
 	/**
-	 * Constructor.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $plugin_file The main plugin file path.
-	 */
-	public function __construct( string $plugin_file ) {
-		$this->plugin_file = $plugin_file;
-	}
-
-	/**
-	 * Register all hooks and initialise components.
+	 * Register all hooks.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @return void
 	 */
 	public function run(): void {
-		$this->status_tracker = new Status_Tracker();
-		$this->status_tracker->register_hooks();
-
-		$this->email_definitions = new Email_Definitions();
-		$this->token_engine      = new Token_Engine();
-
-		$this->email_sender = new Email_Sender(
-			$this->email_definitions,
-			$this->status_tracker,
-			$this->token_engine
-		);
-		$this->email_sender->register_hooks();
-
-		$this->settings = new Settings( $this->email_definitions );
-		$this->settings->register_hooks();
-
+		add_action( 'woocommerce_order_status_changed', array( $this, 'on_order_status_changed' ), 10, 1 );
+		add_action( CRON_HOOK, array( $this, 'on_cron_process_emails' ) );
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'on_admin_enqueue_scripts' ) );
+		add_action( 'wp_ajax_' . AJAX_SEND_TEST_EMAIL, array( $this, 'on_ajax_send_test_email' ) );
 	}
 
 	/**
@@ -117,9 +85,13 @@ class Plugin {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return Status_Tracker|null
+	 * @return Status_Tracker
 	 */
-	public function get_status_tracker(): ?Status_Tracker {
+	public function get_status_tracker(): Status_Tracker {
+		if ( is_null( $this->status_tracker ) ) {
+			$this->status_tracker = new Status_Tracker();
+		}
+
 		return $this->status_tracker;
 	}
 
@@ -128,43 +100,111 @@ class Plugin {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return Email_Definitions|null
+	 * @return Email_Definitions
 	 */
-	public function get_email_definitions(): ?Email_Definitions {
+	public function get_email_definitions(): Email_Definitions {
+		if ( is_null( $this->email_definitions ) ) {
+			$this->email_definitions = new Email_Definitions();
+		}
+
 		return $this->email_definitions;
 	}
 
 	/**
-	 * Get the plugin file path.
+	 * Get the token engine instance.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return string
+	 * @return Token_Engine
 	 */
-	public function get_plugin_file(): string {
-		return $this->plugin_file;
+	public function get_token_engine(): Token_Engine {
+		if ( is_null( $this->token_engine ) ) {
+			$this->token_engine = new Token_Engine();
+		}
+
+		return $this->token_engine;
 	}
 
 	/**
-	 * Get the plugin directory path.
+	 * Get the email sender instance.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return string
+	 * @return Email_Sender
 	 */
-	public function get_plugin_dir(): string {
-		return plugin_dir_path( $this->plugin_file );
+	public function get_email_sender(): Email_Sender {
+		if ( is_null( $this->email_sender ) ) {
+			$this->email_sender = new Email_Sender(
+				$this->get_email_definitions(),
+				$this->get_status_tracker(),
+				$this->get_token_engine()
+			);
+		}
+
+		return $this->email_sender;
 	}
 
 	/**
-	 * Get the plugin directory URL.
+	 * Get the settings instance.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return string
+	 * @return Settings
 	 */
-	public function get_plugin_url(): string {
-		return plugin_dir_url( $this->plugin_file );
+	public function get_settings(): Settings {
+		if ( is_null( $this->settings ) ) {
+			$this->settings = new Settings( $this->get_email_definitions() );
+		}
+
+		return $this->settings;
+	}
+
+	/**
+	 * Handle order status change — delegates to Status_Tracker.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $order_id The order ID.
+	 *
+	 * @return void
+	 */
+	public function on_order_status_changed( int $order_id ): void {
+		$this->get_status_tracker()->on_status_changed( $order_id );
+	}
+
+	/**
+	 * Handle cron email processing — delegates to Email_Sender.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
+	public function on_cron_process_emails(): void {
+		$this->get_email_sender()->process_emails();
+	}
+
+	/**
+	 * Enqueue admin assets — delegates to Settings.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $hook_suffix The current admin page hook suffix.
+	 *
+	 * @return void
+	 */
+	public function on_admin_enqueue_scripts( string $hook_suffix ): void {
+		$this->get_settings()->enqueue_assets( $hook_suffix );
+	}
+
+	/**
+	 * Handle AJAX test email request — delegates to Settings.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
+	public function on_ajax_send_test_email(): void {
+		$this->get_settings()->handle_test_email();
 	}
 
 	/**
@@ -177,11 +217,11 @@ class Plugin {
 	public function add_admin_menu(): void {
 		add_submenu_page(
 			'woocommerce',
-			__( 'Payment Email Notifications', 'payment-email-notifications' ),
-			__( 'Payment Emails', 'payment-email-notifications' ),
+			__( 'Order Status Emails', 'payment-email-notifications' ),
+			__( 'Order Status Emails', 'payment-email-notifications' ),
 			CAPABILITY,
 			ADMIN_PAGE_SLUG,
-			array( $this->settings, 'render_page' )
+			array( $this->get_settings(), 'render_page' )
 		);
 	}
 }
