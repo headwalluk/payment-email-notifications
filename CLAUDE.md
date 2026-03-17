@@ -22,9 +22,16 @@ Each **email definition** specifies:
 
 An **hourly cron job** queries orders at each target status, checks how long they've been there, and sends emails that haven't already been sent.
 
+### Admin UI
+
+The admin page (WooCommerce → Payment Emails) uses tab navigation:
+- **Emails tab** — list, add, edit, delete, and test email definitions
+- **Settings tab** — configure custom order/customer meta keys for token substitution
+
 ### Data Storage
 
 - **Email definitions** — stored as a serialized array in `wp_options` (`pen_email_definitions`)
+- **Custom meta keys** — `wp_options` (`pen_order_meta_keys`, `pen_customer_meta_keys`)
 - **Status change tracking** — order meta `_pen_status_changed_at` (updated on every status change)
 - **Sent log** — order meta `_pen_emails_sent` (array of definition IDs sent for current status; cleared on status change)
 
@@ -35,7 +42,11 @@ Templates support `{{token.name}}` substitution:
 - `{{order.id}}`, `{{order.total}}`, `{{order.date}}`
 - `{{order.items}}` — renders HTML line items table
 - `{{site.name}}`, `{{site.url}}`
+- `{{order.meta.KEY}}` — any order meta field (configured in Settings tab)
+- `{{customer.meta.KEY}}` — any user meta field (configured in Settings tab; empty for guest orders)
 - Extensible via `pen_email_tokens` filter
+
+Custom meta keys are stored as newline-separated strings in `wp_options` (`pen_order_meta_keys`, `pen_customer_meta_keys`) and managed via the admin Settings tab.
 
 ### Key Filters
 

@@ -52,6 +52,10 @@ Yes. Any registered WooCommerce order status can be used as a trigger, including
 
 The plugin runs an hourly cron job that evaluates all orders against your email definitions.
 
+= Can I include custom fields in my emails? =
+
+Yes. Go to the Settings tab and add your order or customer meta keys (one per line). They become available as `{{order.meta.KEY}}` and `{{customer.meta.KEY}}` tokens in your email templates. This works with any meta field including ACF fields.
+
 = Can I customise the email content? =
 
 Yes. Each email definition has its own subject and body with support for template tokens like `{{customer.first_name}}` and `{{order.total}}`. Developers can also use filters for advanced customisation.
