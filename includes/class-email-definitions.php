@@ -32,10 +32,10 @@ class Email_Definitions {
 	 * @return array<string, array<string, mixed>> Keyed by definition ID.
 	 */
 	public function get_all(): array {
-		$definitions = get_option( OPT_EMAIL_DEFINITIONS, [] );
+		$definitions = get_option( OPT_EMAIL_DEFINITIONS, array() );
 
 		if ( ! is_array( $definitions ) ) {
-			$definitions = [];
+			$definitions = array();
 		}
 
 		return $definitions;
@@ -111,7 +111,7 @@ class Email_Definitions {
 	 */
 	public function get_enabled(): array {
 		$definitions = $this->get_all();
-		$result      = [];
+		$result      = array();
 
 		foreach ( $definitions as $id => $definition ) {
 			$enabled = isset( $definition['enabled'] )
@@ -157,7 +157,7 @@ class Email_Definitions {
 	 * @return array<string, mixed> Default definition values.
 	 */
 	public function get_defaults(): array {
-		return [
+		return array(
 			'label'            => '',
 			'subject'          => '',
 			'body'             => '',
@@ -166,6 +166,6 @@ class Email_Definitions {
 			'enabled'          => false,
 			'recipient'        => RECIPIENT_CUSTOMER,
 			'recipient_custom' => '',
-		];
+		);
 	}
 }

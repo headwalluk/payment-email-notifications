@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name:       Payment Email Notifications
+ * Plugin Name:       Order Status Email Notifications
  * Plugin URI:        https://github.com/headwalluk/payment-email-notifications
  * Description:       Send scheduled, WooCommerce-styled emails to customers based on how long an order has been at a given status.
- * Version:           0.2.1
+ * Version:           1.0.0
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            Headwall
@@ -22,7 +22,7 @@
 
 defined( 'ABSPATH' ) || die();
 
-define( 'PEN_PLUGIN_VERSION', '0.2.1' );
+define( 'PEN_PLUGIN_VERSION', '1.0.0' );
 define( 'PEN_PLUGIN_NAME', 'payment-email-notifications' );
 define( 'PEN_PLUGIN_FILE', __FILE__ );
 define( 'PEN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );

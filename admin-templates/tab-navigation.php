@@ -6,34 +6,40 @@
  *
  * @package Payment_Email_Notifications
  *
- * @var string $current_tab The currently active tab slug.
+ * @var string $pen_current_tab The currently active tab slug.
  */
 
 namespace Payment_Email_Notifications;
 
 defined( 'ABSPATH' ) || die();
 
-$tabs = [
-	'emails'   => __( 'Emails', 'payment-email-notifications' ),
+$pen_email_count = count( get_option( OPT_EMAIL_DEFINITIONS, array() ) );
+
+$pen_tabs = array(
+	'emails'   => sprintf(
+		/* translators: %s: email definition count. */
+		__( 'Emails (%s)', 'payment-email-notifications' ),
+		number_format_i18n( $pen_email_count )
+	),
 	'settings' => __( 'Settings', 'payment-email-notifications' ),
-];
+);
 
 printf( '<nav class="nav-tab-wrapper wp-clearfix">' );
 
-foreach ( $tabs as $tab_slug => $tab_label ) {
-	$tab_url = add_query_arg(
-		[
+foreach ( $pen_tabs as $pen_tab_slug => $pen_tab_label ) {
+	$pen_tab_url = add_query_arg(
+		array(
 			'page' => ADMIN_PAGE_SLUG,
-			'tab'  => $tab_slug,
-		],
+			'tab'  => $pen_tab_slug,
+		),
 		admin_url( 'admin.php' )
 	);
 
 	printf(
 		'<a href="%s" class="nav-tab %s">%s</a>',
-		esc_url( $tab_url ),
-		$current_tab === $tab_slug ? 'nav-tab-active' : '',
-		esc_html( $tab_label )
+		esc_url( $pen_tab_url ),
+		$pen_current_tab === $pen_tab_slug ? 'nav-tab-active' : '',
+		esc_html( $pen_tab_label )
 	);
 }
 

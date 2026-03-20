@@ -73,11 +73,13 @@ class Plugin {
 	 * @return void
 	 */
 	public function run(): void {
+		add_action( 'init', array( $this, 'load_textdomain' ) );
 		add_action( 'woocommerce_order_status_changed', array( $this, 'on_order_status_changed' ), 10, 1 );
 		add_action( CRON_HOOK, array( $this, 'on_cron_process_emails' ) );
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'on_admin_enqueue_scripts' ) );
 		add_action( 'wp_ajax_' . AJAX_SEND_TEST_EMAIL, array( $this, 'on_ajax_send_test_email' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( PEN_PLUGIN_FILE ), array( $this, 'add_plugin_action_links' ) );
 	}
 
 	/**
@@ -160,6 +162,17 @@ class Plugin {
 	}
 
 	/**
+	 * Load the plugin text domain for translations.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public function load_textdomain(): void {
+		load_plugin_textdomain( 'payment-email-notifications', false, dirname( plugin_basename( PEN_PLUGIN_FILE ) ) . '/languages' );
+	}
+
+	/**
 	 * Handle order status change — delegates to Status_Tracker.
 	 *
 	 * @since 0.1.0
@@ -205,6 +218,32 @@ class Plugin {
 	 */
 	public function on_ajax_send_test_email(): void {
 		$this->get_settings()->handle_test_email();
+	}
+
+	/**
+	 * Add a Settings link to the plugin row on the Plugins page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array<string> $links Existing action links.
+	 *
+	 * @return array<string> Modified action links.
+	 */
+	public function add_plugin_action_links( array $links ): array {
+		$settings_link = sprintf(
+			'<a href="%s">%s</a>',
+			esc_url(
+				add_query_arg(
+					array( 'page' => ADMIN_PAGE_SLUG ),
+					admin_url( 'admin.php' )
+				)
+			),
+			esc_html__( 'Settings', 'payment-email-notifications' )
+		);
+
+		array_unshift( $links, $settings_link );
+
+		return $links;
 	}
 
 	/**

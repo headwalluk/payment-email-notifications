@@ -1,4 +1,4 @@
-# Payment Email Notifications
+# Order Status Email Notifications
 
 ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue?logo=wordpress)
 ![WooCommerce](https://img.shields.io/badge/WooCommerce-8.0%2B-96588a?logo=woocommerce)
@@ -16,11 +16,12 @@ Send scheduled, WooCommerce-styled emails to customers based on how long an orde
 ## How It Works
 
 1. **Define emails** in the admin: pick a target order status, set a "days at status" threshold, and write the email content
-2. **Token substitution** lets you personalise emails with customer names, order details, line item tables, and custom meta fields
+2. **Token substitution** lets you personalise emails with customer names, order details, line item tables, payment URLs, and custom meta fields
 3. **Custom meta tokens** — configure order and customer meta keys in the Settings tab to use `{{order.meta.KEY}}` and `{{customer.meta.KEY}}` in templates
 4. **Flexible recipients** — send to the customer, the site admin, or a custom email address per definition
-5. **Test emails** — send a test email from the admin list view using the most recent order as sample data
-6. **Hourly cron** checks all orders and sends emails when conditions are met — each email is only sent once per status period
+5. **Send schedule** — optionally restrict sending to specific times of day and days of the week
+6. **Test emails** — send a test email from the admin list view using the most recent order as sample data
+7. **Hourly cron** checks all orders and sends emails when conditions are met — each email is only sent once per status period
 
 ## Requirements
 
@@ -32,7 +33,7 @@ Send scheduled, WooCommerce-styled emails to customers based on how long an orde
 
 1. Upload the `payment-email-notifications` folder to `/wp-content/plugins/`
 2. Activate the plugin through the WordPress admin
-3. Navigate to **WooCommerce → Payment Emails** to configure your email definitions
+3. Navigate to **WooCommerce → Order Status Emails** to configure your email definitions
 
 ## Extending
 

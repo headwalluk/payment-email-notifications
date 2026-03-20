@@ -1,0 +1,443 @@
+# Copyright (C) 2026 Headwall
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Language: de_DE\n"
+"Project-Id-Version: Order Status Email Notifications 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/payment-email-notifications\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-03-20T19:23:47+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: payment-email-notifications\n"
+
+#. Plugin Name of the plugin
+#: payment-email-notifications.php
+msgid "Order Status Email Notifications"
+msgstr "E-Mail-Benachrichtigungen zum Bestellstatus"
+
+#. Plugin URI of the plugin
+#: payment-email-notifications.php
+msgid "https://github.com/headwalluk/payment-email-notifications"
+msgstr "https://github.com/headwalluk/payment-email-notifications"
+
+#. Description of the plugin
+#: payment-email-notifications.php
+msgid "Send scheduled, WooCommerce-styled emails to customers based on how long an order has been at a given status."
+msgstr "Versenden Sie zeitgesteuerte E-Mails im WooCommerce-Design an Kunden, je nachdem, wie lange eine Bestellung bereits in einem bestimmten Status ist."
+
+#. Author of the plugin
+#: payment-email-notifications.php
+msgid "Headwall"
+msgstr "Kopfwand"
+
+#. Author URI of the plugin
+#: payment-email-notifications.php
+msgid "https://headwall.tech"
+msgstr "https://headwall.tech"
+
+#: admin-templates/edit-definition.php:20
+#: admin-templates/edit-definition.php:215
+msgid "Add Email Definition"
+msgstr "E-Mail-Definition hinzufügen"
+
+#: admin-templates/edit-definition.php:21
+msgid "Edit Email Definition"
+msgstr "E-Mail-Definition bearbeiten"
+
+#: admin-templates/edit-definition.php:55
+#: admin-templates/list-definitions.php:84
+msgid "Label"
+msgstr "Bezeichnung"
+
+#: admin-templates/edit-definition.php:60
+msgid "A name for this email definition (for your reference only)."
+msgstr "Ein Name für diese E-Mail-Definition (nur zu Ihrer Information)."
+
+#: admin-templates/edit-definition.php:68
+#: admin-templates/list-definitions.php:85
+msgid "Order Status"
+msgstr "Bestellstatus"
+
+#: admin-templates/edit-definition.php:71
+msgid "— Select —"
+msgstr "— Auswählen —"
+
+#: admin-templates/edit-definition.php:85
+msgid "The order status that triggers this email."
+msgstr "Der Bestellstatus, der diese E-Mail auslöst."
+
+#: admin-templates/edit-definition.php:93
+#: admin-templates/list-definitions.php:86
+msgid "Days at Status"
+msgstr "Tage bei Status"
+
+#: admin-templates/edit-definition.php:98
+msgid "Send this email when an order has been at the target status for this many days."
+msgstr "Diese E-Mail soll versendet werden, wenn ein Auftrag seit so vielen Tagen den Zielstatus hat."
+
+#: admin-templates/edit-definition.php:109
+msgid "Recipient"
+msgstr "Empfänger"
+
+#: admin-templates/edit-definition.php:117
+msgid "Customer billing email"
+msgstr "E-Mail zur Kundenabrechnung"
+
+#: admin-templates/edit-definition.php:123
+msgid "Site admin email"
+msgstr "E-Mail-Adresse des Website-Administrators"
+
+#: admin-templates/edit-definition.php:129
+msgid "Custom email address"
+msgstr "Benutzerdefinierte E-Mail-Adresse"
+
+#: admin-templates/edit-definition.php:136
+msgid "email@example.com"
+msgstr "email@example.com"
+
+#: admin-templates/edit-definition.php:140
+msgid "Who should receive this email."
+msgstr "Wer soll diese E-Mail erhalten?"
+
+#: admin-templates/edit-definition.php:149
+msgid "Email Subject"
+msgstr "Betreff der E-Mail"
+
+#: admin-templates/edit-definition.php:164
+msgid "Available Tokens"
+msgstr "Verfügbare Token"
+
+#: admin-templates/edit-definition.php:180
+msgid "Click a token to copy it to your clipboard."
+msgstr "Klicken Sie auf ein Token, um es in die Zwischenablage zu kopieren."
+
+#: admin-templates/edit-definition.php:189
+msgid "Email Body"
+msgstr "E-Mail-Text"
+
+#: admin-templates/edit-definition.php:194
+msgid "Plain text with tokens. Line breaks will be preserved in the email."
+msgstr "Reiner Text mit Platzhaltern. Zeilenumbrüche bleiben in der E-Mail erhalten."
+
+#: admin-templates/edit-definition.php:202
+#: admin-templates/list-definitions.php:87
+msgid "Enabled"
+msgstr "Aktiviert"
+
+#: admin-templates/edit-definition.php:207
+msgid "Enable this email definition"
+msgstr "Diese E-Mail-Definition aktivieren"
+
+#: admin-templates/edit-definition.php:216
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+#: admin-templates/edit-definition.php:232
+msgid "Are you sure you want to delete this email definition?"
+msgstr "Möchten Sie diese E-Mail-Definition wirklich löschen?"
+
+#: admin-templates/edit-definition.php:241
+msgid "Delete this email definition"
+msgstr "Diese E-Mail-Definition löschen"
+
+#: admin-templates/list-definitions.php:18
+#: admin-templates/settings.php:26
+#: includes/class-plugin.php:247
+#: includes/class-plugin.php:248
+msgid "Order Status Emails"
+msgstr "E-Mails zum Bestellstatus"
+
+#: admin-templates/list-definitions.php:31
+msgid "Add New"
+msgstr "Neu hinzufügen"
+
+#: admin-templates/list-definitions.php:43
+msgid "Email definition saved."
+msgstr "E-Mail-Definition gespeichert."
+
+#: admin-templates/list-definitions.php:50
+msgid "Email definition deleted."
+msgstr "Die E-Mail-Definition wurde gelöscht."
+
+#: admin-templates/list-definitions.php:59
+msgid "Send schedule:"
+msgstr "Sendeplan:"
+
+#: admin-templates/list-definitions.php:67
+msgid "No email definitions configured yet."
+msgstr "Es sind noch keine E-Mail-Definitionen konfiguriert."
+
+#: admin-templates/list-definitions.php:77
+msgid "Create your first email definition"
+msgstr "Erstellen Sie Ihre erste E-Mail-Definition"
+
+#: admin-templates/list-definitions.php:88
+msgid "Actions"
+msgstr "Aktionen"
+
+#: admin-templates/list-definitions.php:126
+msgid "Yes"
+msgstr "Ja"
+
+#: admin-templates/list-definitions.php:127
+msgid "No"
+msgstr "Von"
+
+#: admin-templates/list-definitions.php:133
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: admin-templates/list-definitions.php:135
+#: includes/class-settings.php:85
+msgid "Test"
+msgstr "Test"
+
+#: admin-templates/settings.php:34
+msgid "Settings saved."
+msgstr "Einstellungen gespeichert."
+
+#: admin-templates/settings.php:55
+msgid "Send Schedule"
+msgstr "Zeitplan senden"
+
+#: admin-templates/settings.php:59
+msgid "Use these options to restrict when emails are sent. Emails that fall outside the schedule will simply be sent on the next eligible cron run."
+msgstr "Mit diesen Optionen können Sie festlegen, wann E-Mails versendet werden sollen. E-Mails, die außerhalb des Zeitplans liegen, werden einfach beim nächsten zulässigen Cron-Lauf versendet."
+
+#: admin-templates/settings.php:68
+msgid "Time-of-Day Window"
+msgstr "Tageszeitfenster"
+
+#: admin-templates/settings.php:73
+msgid "Only send emails within a specific time window"
+msgstr "E-Mails nur innerhalb eines bestimmten Zeitfensters versenden"
+
+#: admin-templates/settings.php:81
+msgid "Window Times"
+msgstr "Fensterzeiten"
+
+#: admin-templates/settings.php:86
+msgid "to"
+msgstr "zu"
+
+#. translators: %s: server timezone name, e.g. "Europe/London".
+#: admin-templates/settings.php:93
+#, php-format
+msgid "Server timezone: %s. Emails due outside this window will be sent on the next cron run within the window."
+msgstr "Server-Zeitzone: %s. E-Mails, deren Versand außerhalb dieses Zeitfensters fällig ist, werden beim nächsten Cron-Lauf innerhalb des Zeitfensters versendet."
+
+#: admin-templates/settings.php:103
+msgid "Allowed Days"
+msgstr "Zulässige Tage"
+
+#: admin-templates/settings.php:108
+msgid "Only send emails on specific days of the week"
+msgstr "E-Mails nur an bestimmten Wochentagen versenden"
+
+#: admin-templates/settings.php:114
+#: functions-private.php:89
+msgid "Mon"
+msgstr "Mein"
+
+#: admin-templates/settings.php:115
+#: functions-private.php:90
+msgid "Tue"
+msgstr "Di"
+
+#: admin-templates/settings.php:116
+#: functions-private.php:91
+msgid "Wed"
+msgstr "Wette"
+
+#: admin-templates/settings.php:117
+#: functions-private.php:92
+msgid "Thu"
+msgstr "Herbst"
+
+#: admin-templates/settings.php:118
+#: functions-private.php:93
+msgid "Fri"
+msgstr "Frei"
+
+#: admin-templates/settings.php:119
+#: functions-private.php:94
+msgid "Sat"
+msgstr "Er sagte"
+
+#: admin-templates/settings.php:120
+#: functions-private.php:95
+msgid "Sun"
+msgstr "Sie"
+
+#: admin-templates/settings.php:126
+msgid "Send On"
+msgstr "Weiterleiten"
+
+#: admin-templates/settings.php:142
+msgid "Emails due on excluded days will be sent on the next allowed day."
+msgstr "E-Mails, deren Versand an ausgeschlossenen Tagen fällig wäre, werden am nächsten zulässigen Tag versendet."
+
+#: admin-templates/settings.php:150
+msgid "Custom Meta Tokens"
+msgstr "Benutzerdefinierte Meta-Token"
+
+#: admin-templates/settings.php:158
+msgid "Order Meta Keys"
+msgstr "Meta-Schlüssel bestellen"
+
+#: admin-templates/settings.php:166
+msgid "One meta key per line. These become available as {{order.meta.KEY}} tokens in email templates."
+msgstr "Ein Meta-Schlüssel pro Zeile. Diese stehen in E-Mail-Vorlagen als {{order.meta.KEY}}-Tokens zur Verfügung."
+
+#: admin-templates/settings.php:174
+msgid "Customer Meta Keys"
+msgstr "Kunden-Metaschlüssel"
+
+#: admin-templates/settings.php:182
+msgid "One meta key per line. These become available as {{customer.meta.KEY}} tokens in email templates."
+msgstr "Ein Meta-Schlüssel pro Zeile. Diese stehen in E-Mail-Vorlagen als {{customer.meta.KEY}}-Tokens zur Verfügung."
+
+#: admin-templates/settings.php:183
+msgid "Note: Customer meta tokens will return empty for guest orders."
+msgstr "Hinweis: Bei Gastbestellungen werden die Kunden-Meta-Token leer zurückgegeben."
+
+#: admin-templates/settings.php:189
+msgid "Save Settings"
+msgstr "Einstellungen speichern"
+
+#. translators: %s: email definition count.
+#: admin-templates/tab-navigation.php:21
+#, php-format
+msgid "Emails (%s)"
+msgstr "E-Mails (%s)"
+
+#: admin-templates/tab-navigation.php:24
+#: includes/class-plugin.php:229
+msgid "Settings"
+msgstr "Einstellungen"
+
+#. translators: 1: email definition label, 2: recipient email address.
+#: includes/class-email-sender.php:271
+#, php-format
+msgid "Payment Email Notifications: \"%1$s\" sent to %2$s."
+msgstr "E-Mail-Benachrichtigungen zu Zahlungen: „%1$s“ wurde an %2$s gesendet."
+
+#: includes/class-settings.php:83
+msgid "Enter the email address to send the test email to:"
+msgstr "Geben Sie die E-Mail-Adresse ein, an die die Test-E-Mail gesendet werden soll:"
+
+#: includes/class-settings.php:84
+msgid "Sending…"
+msgstr "Wird gesendet…"
+
+#: includes/class-settings.php:153
+#: includes/class-settings.php:216
+#: includes/class-settings.php:252
+msgid "Security check failed."
+msgstr "Die Sicherheitsprüfung ist fehlgeschlagen."
+
+#: includes/class-settings.php:157
+#: includes/class-settings.php:220
+#: includes/class-settings.php:256
+#: includes/class-settings.php:308
+msgid "Insufficient permissions."
+msgstr "Nicht ausreichende Berechtigungen."
+
+#: includes/class-settings.php:315
+msgid "Definition ID and recipient email are required."
+msgstr "Die Definitions-ID und die E-Mail-Adresse des Empfängers sind Pflichtangaben."
+
+#: includes/class-settings.php:321
+msgid "Email definition not found."
+msgstr "E-Mail-Definition nicht gefunden."
+
+#: includes/class-settings.php:334
+msgid "No orders found in the system to use as sample data."
+msgstr "Im System wurden keine Aufträge gefunden, die als Beispieldaten verwendet werden könnten."
+
+#. translators: 1: recipient email address, 2: order ID.
+#: includes/class-settings.php:346
+#, php-format
+msgid "Test email sent to %1$s using order #%2$d."
+msgstr "Test-E-Mail an %1$s mit der Bestellnummer %2$d gesendet."
+
+#: includes/class-settings.php:354
+msgid "Failed to send test email."
+msgstr "Das Versenden der Test-E-Mail ist fehlgeschlagen."
+
+#: includes/class-token-engine.php:163
+msgid "Customer first name"
+msgstr "Vorname des Kunden"
+
+#: includes/class-token-engine.php:164
+msgid "Customer last name"
+msgstr "Nachname des Kunden"
+
+#: includes/class-token-engine.php:165
+msgid "Customer full name"
+msgstr "Vollständiger Name des Kunden"
+
+#: includes/class-token-engine.php:166
+msgid "Customer email address"
+msgstr "E-Mail-Adresse des Kunden"
+
+#: includes/class-token-engine.php:167
+msgid "Customer company name"
+msgstr "Name des Kundenunternehmens"
+
+#: includes/class-token-engine.php:168
+msgid "Order number"
+msgstr "Bestellnummer"
+
+#: includes/class-token-engine.php:169
+msgid "Formatted order total"
+msgstr "Auftragsbetrag (aufgerundet)"
+
+#: includes/class-token-engine.php:170
+msgid "Order date"
+msgstr "Bestelldatum"
+
+#: includes/class-token-engine.php:171
+msgid "Order items table (HTML)"
+msgstr "Tabelle mit Bestellpositionen (HTML)"
+
+#: includes/class-token-engine.php:172
+msgid "My Account order URL"
+msgstr "Bestell-URL für „Mein Konto“"
+
+#: includes/class-token-engine.php:173
+msgid "Checkout payment URL"
+msgstr "URL für die Bezahlung an der Kasse"
+
+#: includes/class-token-engine.php:174
+msgid "Order status label"
+msgstr "Etikett zum Bestellstatus"
+
+#: includes/class-token-engine.php:175
+msgid "Payment method name"
+msgstr "Name der Zahlungsmethode"
+
+#: includes/class-token-engine.php:176
+msgid "Site name"
+msgstr "Name der Website"
+
+#: includes/class-token-engine.php:177
+msgid "Site URL"
+msgstr "URL der Website"
+
+#. translators: %s: meta key name.
+#: includes/class-token-engine.php:185
+#, php-format
+msgid "Order meta: %s"
+msgstr "Bestell-Meta: %s"
+
+#. translators: %s: meta key name.
+#: includes/class-token-engine.php:193
+#, php-format
+msgid "Customer meta: %s"
+msgstr "Kunden-Meta: %s"

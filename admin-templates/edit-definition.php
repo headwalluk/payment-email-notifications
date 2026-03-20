@@ -16,26 +16,26 @@ namespace Payment_Email_Notifications;
 
 defined( 'ABSPATH' ) || die();
 
-$page_title = $is_new
+$pen_page_title = $is_new
 	? __( 'Add Email Definition', 'payment-email-notifications' )
 	: __( 'Edit Email Definition', 'payment-email-notifications' );
 
-$enabled = isset( $definition['enabled'] )
+$pen_enabled = isset( $definition['enabled'] )
 	? (bool) filter_var( $definition['enabled'], FILTER_VALIDATE_BOOLEAN )
 	: false;
 
 printf( '<div class="wrap">' );
 
-printf( '<h1>%s</h1>', esc_html( $page_title ) );
+printf( '<h1>%s</h1>', esc_html( $pen_page_title ) );
 
-$current_tab = 'emails';
+$pen_current_tab = 'emails';
 require PEN_PLUGIN_DIR . 'admin-templates/tab-navigation.php';
 
 printf(
 	'<form method="post" action="%s">',
 	esc_url(
 		add_query_arg(
-			[ 'page' => ADMIN_PAGE_SLUG ],
+			array( 'page' => ADMIN_PAGE_SLUG ),
 			admin_url( 'admin.php' )
 		)
 	)
@@ -70,12 +70,12 @@ printf(
 printf( '<td><select name="pen_status" id="pen_status" required>' );
 printf( '<option value="">%s</option>', esc_html__( '— Select —', 'payment-email-notifications' ) );
 
-foreach ( $statuses as $status_slug => $status_label ) {
+foreach ( $statuses as $pen_status_slug => $pen_status_label ) {
 	printf(
 		'<option value="%s" %s>%s</option>',
-		esc_attr( $status_slug ),
-		selected( $definition['status'], $status_slug, false ),
-		esc_html( $status_label )
+		esc_attr( $pen_status_slug ),
+		selected( $definition['status'], $pen_status_slug, false ),
+		esc_html( $pen_status_label )
 	);
 }
 
@@ -100,8 +100,8 @@ printf(
 printf( '</tr>' );
 
 // Recipient.
-$recipient_type   = isset( $definition['recipient'] ) ? $definition['recipient'] : RECIPIENT_CUSTOMER;
-$recipient_custom = isset( $definition['recipient_custom'] ) ? $definition['recipient_custom'] : '';
+$pen_recipient_type   = isset( $definition['recipient'] ) ? $definition['recipient'] : RECIPIENT_CUSTOMER;
+$pen_recipient_custom = isset( $definition['recipient_custom'] ) ? $definition['recipient_custom'] : '';
 
 printf( '<tr>' );
 printf(
@@ -113,26 +113,26 @@ printf( '<select name="pen_recipient" id="pen_recipient">' );
 printf(
 	'<option value="%s" %s>%s</option>',
 	esc_attr( RECIPIENT_CUSTOMER ),
-	selected( $recipient_type, RECIPIENT_CUSTOMER, false ),
+	selected( $pen_recipient_type, RECIPIENT_CUSTOMER, false ),
 	esc_html__( 'Customer billing email', 'payment-email-notifications' )
 );
 printf(
 	'<option value="%s" %s>%s</option>',
 	esc_attr( RECIPIENT_ADMIN ),
-	selected( $recipient_type, RECIPIENT_ADMIN, false ),
+	selected( $pen_recipient_type, RECIPIENT_ADMIN, false ),
 	esc_html__( 'Site admin email', 'payment-email-notifications' )
 );
 printf(
 	'<option value="%s" %s>%s</option>',
 	esc_attr( RECIPIENT_CUSTOM ),
-	selected( $recipient_type, RECIPIENT_CUSTOM, false ),
+	selected( $pen_recipient_type, RECIPIENT_CUSTOM, false ),
 	esc_html__( 'Custom email address', 'payment-email-notifications' )
 );
 printf( '</select>' );
 printf(
 	'<input type="email" name="pen_recipient_custom" id="pen_recipient_custom" value="%s" class="regular-text" style="margin-left:10px;%s" placeholder="%s">',
-	esc_attr( $recipient_custom ),
-	RECIPIENT_CUSTOM !== $recipient_type ? 'display:none;' : '',
+	esc_attr( $pen_recipient_custom ),
+	RECIPIENT_CUSTOM !== $pen_recipient_type ? 'display:none;' : '',
 	esc_attr__( 'email@example.com', 'payment-email-notifications' )
 );
 printf(
@@ -155,8 +155,8 @@ printf(
 printf( '</tr>' );
 
 // Available tokens.
-$token_engine    = new Token_Engine();
-$token_reference = $token_engine->get_token_reference();
+$pen_token_engine    = new Token_Engine();
+$pen_token_reference = $pen_token_engine->get_token_reference();
 
 printf( '<tr>' );
 printf(
@@ -165,12 +165,12 @@ printf(
 );
 printf( '<td><div class="pen-token-pills">' );
 
-foreach ( $token_reference as $token_name => $token_desc ) {
+foreach ( $pen_token_reference as $pen_token_name => $pen_token_desc ) {
 	printf(
 		'<button type="button" class="pen-token-pill" data-token="{{%s}}" title="%s">%s</button>',
-		esc_attr( $token_name ),
-		esc_attr( $token_desc ),
-		esc_html( '{{' . $token_name . '}}' )
+		esc_attr( $pen_token_name ),
+		esc_attr( $pen_token_desc ),
+		esc_html( '{{' . $pen_token_name . '}}' )
 	);
 }
 
@@ -203,7 +203,7 @@ printf(
 );
 printf(
 	'<td><label><input type="checkbox" name="pen_enabled" value="1" %s> %s</label></td>',
-	checked( $enabled, true, false ),
+	checked( $pen_enabled, true, false ),
 	esc_html__( 'Enable this email definition', 'payment-email-notifications' )
 );
 printf( '</tr>' );
@@ -225,7 +225,7 @@ if ( ! $is_new ) {
 		'<form method="post" action="%s" onsubmit="return confirm(\'%s\');">',
 		esc_url(
 			add_query_arg(
-				[ 'page' => ADMIN_PAGE_SLUG ],
+				array( 'page' => ADMIN_PAGE_SLUG ),
 				admin_url( 'admin.php' )
 			)
 		),

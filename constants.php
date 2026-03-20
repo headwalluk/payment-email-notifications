@@ -37,5 +37,19 @@ const RECIPIENT_CUSTOMER = 'customer';
 const RECIPIENT_ADMIN    = 'admin';
 const RECIPIENT_CUSTOM   = 'custom';
 
+// Send schedule options.
+const OPT_SEND_WINDOW_ENABLED = 'pen_send_window_enabled';
+const OPT_SEND_WINDOW_START   = 'pen_send_window_start';
+const OPT_SEND_WINDOW_END     = 'pen_send_window_end';
+const OPT_SEND_DAYS_ENABLED   = 'pen_send_days_enabled';
+const OPT_SEND_DAYS           = 'pen_send_days';
+
+// Default send window times.
+const DEFAULT_SEND_WINDOW_START = '09:00';
+const DEFAULT_SEND_WINDOW_END   = '17:00';
+
+// All days of the week (used for day-of-week gating).
+const ALL_DAYS = array( 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun' );
+
 // AJAX action for test emails.
 const AJAX_SEND_TEST_EMAIL = 'pen_send_test_email';

@@ -45,7 +45,7 @@ class Status_Tracker {
 		}
 
 		$order->update_meta_data( META_STATUS_CHANGED_AT, pen_get_now_formatted() );
-		$order->update_meta_data( META_EMAILS_SENT, [] );
+		$order->update_meta_data( META_EMAILS_SENT, array() );
 		$order->save();
 	}
 
@@ -94,7 +94,7 @@ class Status_Tracker {
 		$sent = $order->get_meta( META_EMAILS_SENT, true );
 
 		if ( ! is_array( $sent ) ) {
-			$sent = [];
+			$sent = array();
 		}
 
 		return in_array( $definition_id, $sent, true );
@@ -114,7 +114,7 @@ class Status_Tracker {
 		$sent = $order->get_meta( META_EMAILS_SENT, true );
 
 		if ( ! is_array( $sent ) ) {
-			$sent = [];
+			$sent = array();
 		}
 
 		if ( ! in_array( $definition_id, $sent, true ) ) {

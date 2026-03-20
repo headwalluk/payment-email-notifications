@@ -1,10 +1,10 @@
 # Project Tracker
 
-**Plugin:** Payment Email Notifications
-**Version:** 0.2.1
-**Last Updated:** 2026-03-17
-**Current Phase:** M6 (Admin Enhancements)
-**Overall Progress:** 80%
+**Plugin:** Order Status Email Notifications
+**Version:** 1.0.0
+**Last Updated:** 2026-03-20
+**Current Phase:** v1.0.0 Released
+**Overall Progress:** 100%
 
 ---
 
@@ -59,8 +59,9 @@ WordPress/WooCommerce plugin that sends scheduled, WooCommerce-styled emails to 
 - [x] Create `includes/class-token-engine.php`
 - [x] Implement core tokens: `customer.*`, `order.*`, `site.*`
 - [x] Implement `{{order.items}}` — render WooCommerce-styled line items table
+- [x] Implement `{{order.view_url}}`, `{{order.payment_url}}`, `{{order.status}}`
 - [x] Add `pen_email_tokens` filter for extensibility
-- [x] Token reference display in admin edit form (collapsible list of available tokens)
+- [x] Token reference display in admin edit form (clickable pills with clipboard copy)
 
 ### M5 — Cron & Email Sending
 > The engine: hourly cron evaluates orders and sends emails.
@@ -75,6 +76,7 @@ WordPress/WooCommerce plugin that sends scheduled, WooCommerce-styled emails to 
 - [x] Add `pen_should_send_email` filter
 - [x] Handle errors gracefully: log failures, don't block other emails
 - [x] Add WooCommerce order note when email is sent
+- [x] Send schedule gating: time-of-day window and day-of-week restrictions
 
 ### M6 — Admin Enhancements
 > Polish the admin experience.
@@ -83,25 +85,26 @@ WordPress/WooCommerce plugin that sends scheduled, WooCommerce-styled emails to 
 - [x] Test email send from admin: "Test" button on list view prompts for recipient, sends using most recent order
 - [x] Admin tab navigation (Emails / Settings tabs)
 - [x] Custom meta tokens: configurable order & customer meta keys via Settings tab (`{{order.meta.KEY}}`, `{{customer.meta.KEY}}`)
-- [ ] Sent email log viewer per order (meta box on order edit screen)
-- [ ] Inline help text / tooltips on settings page
-- [ ] Admin notice if no email definitions are configured
-
-> **Note:** Meta key settings UI may be extended later with ACF integration.
+- [x] Send schedule settings UI (time-of-day window, day-of-week checkboxes)
+- [x] Email definition count on Emails tab
+- [x] Send schedule summary notice on Emails list view
+- [x] Settings link on Plugins page
+- [x] Server timezone display on schedule settings
 
 ### M7 — Final Testing & Release
 > Get the plugin ready for v1.0.0.
 
-- [ ] Write `docs/` developer documentation (hooks reference, extending the plugin)
-- [ ] Final `phpcs` pass — zero violations
-- [ ] Test full workflow end-to-end: create definition → order changes status → email sent on schedule
-- [ ] Tag v1.0.0
+- [x] Final `phpcs` pass — zero violations
+- [x] Plugin Check compliance (prefixed template variables, `.distignore`)
+- [x] Text domain loading for translation support
+- [x] Update all version references and changelogs
+- [x] Tag v1.0.0
 
 ---
 
 ## Technical Debt
 
-_None yet — clean slate._
+_None — clean slate._
 
 ---
 

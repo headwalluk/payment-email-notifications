@@ -88,3 +88,14 @@
 	0%, 60% { opacity: 1; }
 	100% { opacity: 0; }
 }
+
+.pen-day-checkboxes {
+	display: flex;
+	gap: 16px;
+}
+
+.pen-day-checkboxes label {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}

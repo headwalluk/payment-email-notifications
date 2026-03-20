@@ -111,6 +111,10 @@ class Email_Sender {
 	 * @return void
 	 */
 	public function process_emails(): void {
+		if ( ! pen_is_within_send_schedule() ) {
+			return;
+		}
+
 		$enabled_definitions = $this->definitions->get_enabled();
 
 		foreach ( $enabled_definitions as $definition_id => $definition ) {
@@ -139,10 +143,10 @@ class Email_Sender {
 		}
 
 		$orders = wc_get_orders(
-			[
+			array(
 				'status' => $status_for_query,
 				'limit'  => -1,
-			]
+			)
 		);
 
 		foreach ( $orders as $order ) {
@@ -356,7 +360,7 @@ class Email_Sender {
 	 */
 	private function wrap_in_wc_email_template( string $content, string $heading ): string {
 		ob_start();
-		wc_get_template( 'emails/email-header.php', [ 'email_heading' => $heading ] );
+		wc_get_template( 'emails/email-header.php', array( 'email_heading' => $heading ) );
 		echo wp_kses_post( $content );
 		wc_get_template( 'emails/email-footer.php' );
 		$result = ob_get_clean();

@@ -67,7 +67,7 @@ class Token_Engine {
 	 * @return array<string, string> Token name => value map.
 	 */
 	private function build_token_map( \WC_Order $order ): array {
-		$tokens = [];
+		$tokens = array();
 
 		// Customer tokens.
 		$tokens['customer.first_name'] = $order->get_billing_first_name();
@@ -81,6 +81,13 @@ class Token_Engine {
 		$tokens['order.total'] = $order->get_formatted_order_total();
 		$tokens['order.date']  = wc_format_datetime( $order->get_date_created() );
 		$tokens['order.items'] = $this->render_order_items_table( $order );
+
+		// Order URL tokens.
+		$tokens['order.view_url']    = $order->get_view_order_url();
+		$tokens['order.payment_url'] = $order->get_checkout_payment_url();
+
+		// Order status (human-readable label).
+		$tokens['order.status'] = wc_get_order_status_name( $order->get_status() );
 
 		// Payment tokens.
 		$tokens['order.payment_method'] = $order->get_payment_method_title();
@@ -129,12 +136,12 @@ class Token_Engine {
 
 		wc_get_template(
 			'emails/email-order-details.php',
-			[
+			array(
 				'order'         => $order,
 				'sent_to_admin' => false,
 				'plain_text'    => false,
 				'email'         => '',
-			]
+			)
 		);
 
 		$result = ob_get_clean();
@@ -152,7 +159,7 @@ class Token_Engine {
 	 * @return array<string, string> Token name => description.
 	 */
 	public function get_token_reference(): array {
-		$reference = [
+		$reference = array(
 			'customer.first_name'  => __( 'Customer first name', 'payment-email-notifications' ),
 			'customer.last_name'   => __( 'Customer last name', 'payment-email-notifications' ),
 			'customer.full_name'   => __( 'Customer full name', 'payment-email-notifications' ),
@@ -162,10 +169,13 @@ class Token_Engine {
 			'order.total'          => __( 'Formatted order total', 'payment-email-notifications' ),
 			'order.date'           => __( 'Order date', 'payment-email-notifications' ),
 			'order.items'          => __( 'Order items table (HTML)', 'payment-email-notifications' ),
+			'order.view_url'       => __( 'My Account order URL', 'payment-email-notifications' ),
+			'order.payment_url'    => __( 'Checkout payment URL', 'payment-email-notifications' ),
+			'order.status'         => __( 'Order status label', 'payment-email-notifications' ),
 			'order.payment_method' => __( 'Payment method name', 'payment-email-notifications' ),
 			'site.name'            => __( 'Site name', 'payment-email-notifications' ),
 			'site.url'             => __( 'Site URL', 'payment-email-notifications' ),
-		];
+		);
 
 		// Configured order meta tokens.
 		$order_meta_keys = $this->get_configured_meta_keys( OPT_ORDER_META_KEYS );
@@ -202,7 +212,7 @@ class Token_Engine {
 		$raw = get_option( $option_key, '' );
 
 		if ( empty( $raw ) ) {
-			return [];
+			return array();
 		}
 
 		$keys = explode( "\n", $raw );

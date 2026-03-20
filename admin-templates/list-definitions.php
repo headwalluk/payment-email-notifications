@@ -21,17 +21,17 @@ printf(
 	'<a href="%s" class="page-title-action">%s</a>',
 	esc_url(
 		add_query_arg(
-			[
+			array(
 				'page'   => ADMIN_PAGE_SLUG,
 				'action' => 'add',
-			],
+			),
 			admin_url( 'admin.php' )
 		)
 	),
 	esc_html__( 'Add New', 'payment-email-notifications' )
 );
 
-$current_tab = 'emails';
+$pen_current_tab = 'emails';
 require PEN_PLUGIN_DIR . 'admin-templates/tab-navigation.php';
 
 printf( '<hr class="wp-header-end">' );
@@ -52,23 +52,32 @@ if ( isset( $_GET['deleted'] ) ) {
 }
 // phpcs:enable
 
+$pen_schedule_summary = pen_get_schedule_summary();
+if ( ! empty( $pen_schedule_summary ) ) {
+	printf(
+		'<div class="notice notice-info inline"><p>%s <strong>%s</strong></p></div>',
+		esc_html__( 'Send schedule:', 'payment-email-notifications' ),
+		esc_html( $pen_schedule_summary )
+	);
+}
+
 if ( empty( $definitions ) ) {
 	printf(
 		'<div class="pen-empty-state"><p>%s</p><p><a href="%s" class="button button-primary">%s</a></p></div>',
 		esc_html__( 'No email definitions configured yet.', 'payment-email-notifications' ),
 		esc_url(
 			add_query_arg(
-				[
+				array(
 					'page'   => ADMIN_PAGE_SLUG,
 					'action' => 'add',
-				],
+				),
 				admin_url( 'admin.php' )
 			)
 		),
 		esc_html__( 'Create your first email definition', 'payment-email-notifications' )
 	);
 } else {
-	$all_statuses = function_exists( 'wc_get_order_statuses' ) ? wc_get_order_statuses() : [];
+	$pen_all_statuses = function_exists( 'wc_get_order_statuses' ) ? wc_get_order_statuses() : array();
 
 	printf( '<table class="wp-list-table widefat fixed striped">' );
 	printf( '<thead><tr>' );
@@ -81,21 +90,21 @@ if ( empty( $definitions ) ) {
 
 	printf( '<tbody>' );
 
-	foreach ( $definitions as $id => $definition ) {
-		$status_label = isset( $all_statuses[ $definition['status'] ] )
-			? $all_statuses[ $definition['status'] ]
-			: $definition['status'];
+	foreach ( $definitions as $pen_def_id => $pen_definition ) {
+		$pen_status_label = isset( $pen_all_statuses[ $pen_definition['status'] ] )
+			? $pen_all_statuses[ $pen_definition['status'] ]
+			: $pen_definition['status'];
 
-		$enabled = isset( $definition['enabled'] )
-			? (bool) filter_var( $definition['enabled'], FILTER_VALIDATE_BOOLEAN )
+		$pen_enabled = isset( $pen_definition['enabled'] )
+			? (bool) filter_var( $pen_definition['enabled'], FILTER_VALIDATE_BOOLEAN )
 			: false;
 
-		$edit_url = add_query_arg(
-			[
+		$pen_edit_url = add_query_arg(
+			array(
 				'page'       => ADMIN_PAGE_SLUG,
 				'action'     => 'edit',
-				'definition' => $id,
-			],
+				'definition' => $pen_def_id,
+			),
 			admin_url( 'admin.php' )
 		);
 
@@ -103,26 +112,26 @@ if ( empty( $definitions ) ) {
 
 		printf(
 			'<td><a href="%s"><strong>%s</strong></a></td>',
-			esc_url( $edit_url ),
-			esc_html( $definition['label'] )
+			esc_url( $pen_edit_url ),
+			esc_html( $pen_definition['label'] )
 		);
 
-		printf( '<td>%s</td>', esc_html( $status_label ) );
-		printf( '<td>%d</td>', absint( $definition['days'] ) );
+		printf( '<td>%s</td>', esc_html( $pen_status_label ) );
+		printf( '<td>%d</td>', absint( $pen_definition['days'] ) );
 
 		printf(
 			'<td><span class="pen-status pen-status-%s">%s</span></td>',
-			$enabled ? 'enabled' : 'disabled',
-			$enabled
+			$pen_enabled ? 'enabled' : 'disabled',
+			$pen_enabled
 				? esc_html__( 'Yes', 'payment-email-notifications' )
 				: esc_html__( 'No', 'payment-email-notifications' )
 		);
 
 		printf(
 			'<td><a href="%s" class="button button-small">%s</a> <button type="button" class="button button-small pen-test-email" data-definition-id="%s">%s</button></td>',
-			esc_url( $edit_url ),
+			esc_url( $pen_edit_url ),
 			esc_html__( 'Edit', 'payment-email-notifications' ),
-			esc_attr( $id ),
+			esc_attr( $pen_def_id ),
 			esc_html__( 'Test', 'payment-email-notifications' )
 		);
 

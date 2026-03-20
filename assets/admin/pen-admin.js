@@ -67,4 +67,14 @@
 			$custom.hide();
 		}
 	} );
+
+	// Send window toggle.
+	$( document ).on( 'change', '#pen_send_window_enabled', function () {
+		$( '.pen-send-window-times' ).toggle( $( this ).is( ':checked' ) );
+	} );
+
+	// Send days toggle.
+	$( document ).on( 'change', '#pen_send_days_enabled', function () {
+		$( '.pen-send-days-options' ).toggle( $( this ).is( ':checked' ) );
+	} );
 } )( jQuery );

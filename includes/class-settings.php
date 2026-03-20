@@ -61,14 +61,14 @@ class Settings {
 		wp_enqueue_style(
 			'pen-admin',
 			PEN_PLUGIN_URL . 'assets/admin/pen-admin.css',
-			[],
+			array(),
 			PEN_PLUGIN_VERSION
 		);
 
 		wp_enqueue_script(
 			'pen-admin',
 			PEN_PLUGIN_URL . 'assets/admin/pen-admin.js',
-			[ 'jquery' ],
+			array( 'jquery' ),
 			PEN_PLUGIN_VERSION,
 			true
 		);
@@ -76,14 +76,14 @@ class Settings {
 		wp_localize_script(
 			'pen-admin',
 			'penAdmin',
-			[
+			array(
 				'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
 				'testNonce'     => wp_create_nonce( 'pen_test_email' ),
 				'testAction'    => AJAX_SEND_TEST_EMAIL,
 				'promptMessage' => __( 'Enter the email address to send the test email to:', 'payment-email-notifications' ),
 				'sendingText'   => __( 'Sending…', 'payment-email-notifications' ),
 				'testText'      => __( 'Test', 'payment-email-notifications' ),
-			]
+			)
 		);
 	}
 
@@ -170,7 +170,7 @@ class Settings {
 		// phpcs:enable
 
 		// Validate recipient type.
-		$valid_recipients = [ RECIPIENT_CUSTOMER, RECIPIENT_ADMIN, RECIPIENT_CUSTOM ];
+		$valid_recipients = array( RECIPIENT_CUSTOMER, RECIPIENT_ADMIN, RECIPIENT_CUSTOM );
 		if ( ! in_array( $recipient, $valid_recipients, true ) ) {
 			$recipient = RECIPIENT_CUSTOMER;
 		}
@@ -179,7 +179,7 @@ class Settings {
 			$definition_id = $this->definitions->generate_id( $label );
 		}
 
-		$definition = [
+		$definition = array(
 			'label'            => $label,
 			'subject'          => $subject,
 			'body'             => $body,
@@ -188,16 +188,16 @@ class Settings {
 			'enabled'          => $enabled,
 			'recipient'        => $recipient,
 			'recipient_custom' => $recipient_custom,
-		];
+		);
 
 		$this->definitions->save( $definition_id, $definition );
 
 		wp_safe_redirect(
 			add_query_arg(
-				[
+				array(
 					'page'    => ADMIN_PAGE_SLUG,
 					'updated' => '1',
-				],
+				),
 				admin_url( 'admin.php' )
 			)
 		);
@@ -230,10 +230,10 @@ class Settings {
 
 		wp_safe_redirect(
 			add_query_arg(
-				[
+				array(
 					'page'    => ADMIN_PAGE_SLUG,
 					'deleted' => '1',
-				],
+				),
 				admin_url( 'admin.php' )
 			)
 		);
@@ -259,18 +259,35 @@ class Settings {
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- Nonce verified above.
 		$order_meta_keys    = isset( $_POST['pen_order_meta_keys'] ) ? sanitize_textarea_field( wp_unslash( $_POST['pen_order_meta_keys'] ) ) : '';
 		$customer_meta_keys = isset( $_POST['pen_customer_meta_keys'] ) ? sanitize_textarea_field( wp_unslash( $_POST['pen_customer_meta_keys'] ) ) : '';
+
+		// Send schedule settings.
+		$send_window_enabled = isset( $_POST['pen_send_window_enabled'] );
+		$send_window_start   = isset( $_POST['pen_send_window_start'] ) ? sanitize_text_field( wp_unslash( $_POST['pen_send_window_start'] ) ) : DEFAULT_SEND_WINDOW_START;
+		$send_window_end     = isset( $_POST['pen_send_window_end'] ) ? sanitize_text_field( wp_unslash( $_POST['pen_send_window_end'] ) ) : DEFAULT_SEND_WINDOW_END;
+		$send_days_enabled   = isset( $_POST['pen_send_days_enabled'] );
+		$send_days           = isset( $_POST['pen_send_days'] ) && is_array( $_POST['pen_send_days'] )
+			? array_map( 'sanitize_text_field', wp_unslash( $_POST['pen_send_days'] ) )
+			: array();
+
+		// Validate send days against known values.
+		$send_days = array_intersect( $send_days, ALL_DAYS );
 		// phpcs:enable
 
 		update_option( OPT_ORDER_META_KEYS, $order_meta_keys );
 		update_option( OPT_CUSTOMER_META_KEYS, $customer_meta_keys );
+		update_option( OPT_SEND_WINDOW_ENABLED, $send_window_enabled );
+		update_option( OPT_SEND_WINDOW_START, $send_window_start );
+		update_option( OPT_SEND_WINDOW_END, $send_window_end );
+		update_option( OPT_SEND_DAYS_ENABLED, $send_days_enabled );
+		update_option( OPT_SEND_DAYS, $send_days );
 
 		wp_safe_redirect(
 			add_query_arg(
-				[
+				array(
 					'page'    => ADMIN_PAGE_SLUG,
 					'tab'     => 'settings',
 					'updated' => '1',
-				],
+				),
 				admin_url( 'admin.php' )
 			)
 		);
@@ -288,33 +305,33 @@ class Settings {
 		check_ajax_referer( 'pen_test_email', 'nonce' );
 
 		if ( ! current_user_can( CAPABILITY ) ) {
-			wp_send_json_error( [ 'message' => __( 'Insufficient permissions.', 'payment-email-notifications' ) ] );
+			wp_send_json_error( array( 'message' => __( 'Insufficient permissions.', 'payment-email-notifications' ) ) );
 		}
 
 		$definition_id = isset( $_POST['definition_id'] ) ? sanitize_text_field( wp_unslash( $_POST['definition_id'] ) ) : '';
 		$recipient     = isset( $_POST['recipient'] ) ? sanitize_email( wp_unslash( $_POST['recipient'] ) ) : '';
 
 		if ( empty( $definition_id ) || empty( $recipient ) ) {
-			wp_send_json_error( [ 'message' => __( 'Definition ID and recipient email are required.', 'payment-email-notifications' ) ] );
+			wp_send_json_error( array( 'message' => __( 'Definition ID and recipient email are required.', 'payment-email-notifications' ) ) );
 		}
 
 		$definition = $this->definitions->get( $definition_id );
 
 		if ( null === $definition ) {
-			wp_send_json_error( [ 'message' => __( 'Email definition not found.', 'payment-email-notifications' ) ] );
+			wp_send_json_error( array( 'message' => __( 'Email definition not found.', 'payment-email-notifications' ) ) );
 		}
 
 		// Get the most recent order.
 		$orders = wc_get_orders(
-			[
+			array(
 				'limit'   => 1,
 				'orderby' => 'date',
 				'order'   => 'DESC',
-			]
+			)
 		);
 
 		if ( empty( $orders ) ) {
-			wp_send_json_error( [ 'message' => __( 'No orders found in the system to use as sample data.', 'payment-email-notifications' ) ] );
+			wp_send_json_error( array( 'message' => __( 'No orders found in the system to use as sample data.', 'payment-email-notifications' ) ) );
 		}
 
 		$order        = $orders[0];
@@ -323,18 +340,18 @@ class Settings {
 
 		if ( $result ) {
 			wp_send_json_success(
-				[
+				array(
 					'message' => sprintf(
 						/* translators: 1: recipient email address, 2: order ID. */
 						__( 'Test email sent to %1$s using order #%2$d.', 'payment-email-notifications' ),
 						$recipient,
 						$order->get_id()
 					),
-				]
+				)
 			);
 		}
 
-		wp_send_json_error( [ 'message' => __( 'Failed to send test email.', 'payment-email-notifications' ) ] );
+		wp_send_json_error( array( 'message' => __( 'Failed to send test email.', 'payment-email-notifications' ) ) );
 	}
 
 	/**
@@ -388,9 +405,14 @@ class Settings {
 	 * @return void
 	 */
 	private function render_settings_view(): void {
-		$order_meta_keys    = get_option( OPT_ORDER_META_KEYS, '' );
-		$customer_meta_keys = get_option( OPT_CUSTOMER_META_KEYS, '' );
-		$plugin_dir         = PEN_PLUGIN_DIR;
+		$order_meta_keys     = get_option( OPT_ORDER_META_KEYS, '' );
+		$customer_meta_keys  = get_option( OPT_CUSTOMER_META_KEYS, '' );
+		$send_window_enabled = (bool) get_option( OPT_SEND_WINDOW_ENABLED, false );
+		$send_window_start   = get_option( OPT_SEND_WINDOW_START, DEFAULT_SEND_WINDOW_START );
+		$send_window_end     = get_option( OPT_SEND_WINDOW_END, DEFAULT_SEND_WINDOW_END );
+		$send_days_enabled   = (bool) get_option( OPT_SEND_DAYS_ENABLED, false );
+		$send_days           = get_option( OPT_SEND_DAYS, ALL_DAYS );
+		$plugin_dir          = PEN_PLUGIN_DIR;
 
 		include $plugin_dir . 'admin-templates/settings.php';
 	}
@@ -403,7 +425,7 @@ class Settings {
 	 * @return array<string, string> Status slug => label.
 	 */
 	private function get_order_statuses(): array {
-		$statuses = [];
+		$statuses = array();
 
 		if ( function_exists( 'wc_get_order_statuses' ) ) {
 			$statuses = wc_get_order_statuses();

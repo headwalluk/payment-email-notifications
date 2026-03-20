@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-03-20
+
+### Added
+- Send schedule settings: time-of-day window and day-of-week restrictions
+- New tokens: `{{order.view_url}}`, `{{order.payment_url}}`, `{{order.status}}`
+- Settings link on the Plugins page
+- Email definition count on Emails tab
+- Send schedule summary notice on Emails list view
+- Server timezone display on schedule settings
+- `.distignore` for clean distribution builds
+- Text domain loading for translation support
+
+### Changed
+- Renamed plugin to Order Status Email Notifications
+- Prefixed all admin template variables for Plugin Check compliance
+
 ## [0.2.1] - 2026-03-17
 
 ### Added

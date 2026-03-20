@@ -1,0 +1,442 @@
+# Copyright (C) 2026 Headwall
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Order Status Email Notifications 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/payment-email-notifications\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-03-20T19:23:47+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: payment-email-notifications\n"
+
+#. Plugin Name of the plugin
+#: payment-email-notifications.php
+msgid "Order Status Email Notifications"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: payment-email-notifications.php
+msgid "https://github.com/headwalluk/payment-email-notifications"
+msgstr ""
+
+#. Description of the plugin
+#: payment-email-notifications.php
+msgid "Send scheduled, WooCommerce-styled emails to customers based on how long an order has been at a given status."
+msgstr ""
+
+#. Author of the plugin
+#: payment-email-notifications.php
+msgid "Headwall"
+msgstr ""
+
+#. Author URI of the plugin
+#: payment-email-notifications.php
+msgid "https://headwall.tech"
+msgstr ""
+
+#: admin-templates/edit-definition.php:20
+#: admin-templates/edit-definition.php:215
+msgid "Add Email Definition"
+msgstr ""
+
+#: admin-templates/edit-definition.php:21
+msgid "Edit Email Definition"
+msgstr ""
+
+#: admin-templates/edit-definition.php:55
+#: admin-templates/list-definitions.php:84
+msgid "Label"
+msgstr ""
+
+#: admin-templates/edit-definition.php:60
+msgid "A name for this email definition (for your reference only)."
+msgstr ""
+
+#: admin-templates/edit-definition.php:68
+#: admin-templates/list-definitions.php:85
+msgid "Order Status"
+msgstr ""
+
+#: admin-templates/edit-definition.php:71
+msgid "— Select —"
+msgstr ""
+
+#: admin-templates/edit-definition.php:85
+msgid "The order status that triggers this email."
+msgstr ""
+
+#: admin-templates/edit-definition.php:93
+#: admin-templates/list-definitions.php:86
+msgid "Days at Status"
+msgstr ""
+
+#: admin-templates/edit-definition.php:98
+msgid "Send this email when an order has been at the target status for this many days."
+msgstr ""
+
+#: admin-templates/edit-definition.php:109
+msgid "Recipient"
+msgstr ""
+
+#: admin-templates/edit-definition.php:117
+msgid "Customer billing email"
+msgstr ""
+
+#: admin-templates/edit-definition.php:123
+msgid "Site admin email"
+msgstr ""
+
+#: admin-templates/edit-definition.php:129
+msgid "Custom email address"
+msgstr ""
+
+#: admin-templates/edit-definition.php:136
+msgid "email@example.com"
+msgstr ""
+
+#: admin-templates/edit-definition.php:140
+msgid "Who should receive this email."
+msgstr ""
+
+#: admin-templates/edit-definition.php:149
+msgid "Email Subject"
+msgstr ""
+
+#: admin-templates/edit-definition.php:164
+msgid "Available Tokens"
+msgstr ""
+
+#: admin-templates/edit-definition.php:180
+msgid "Click a token to copy it to your clipboard."
+msgstr ""
+
+#: admin-templates/edit-definition.php:189
+msgid "Email Body"
+msgstr ""
+
+#: admin-templates/edit-definition.php:194
+msgid "Plain text with tokens. Line breaks will be preserved in the email."
+msgstr ""
+
+#: admin-templates/edit-definition.php:202
+#: admin-templates/list-definitions.php:87
+msgid "Enabled"
+msgstr ""
+
+#: admin-templates/edit-definition.php:207
+msgid "Enable this email definition"
+msgstr ""
+
+#: admin-templates/edit-definition.php:216
+msgid "Save Changes"
+msgstr ""
+
+#: admin-templates/edit-definition.php:232
+msgid "Are you sure you want to delete this email definition?"
+msgstr ""
+
+#: admin-templates/edit-definition.php:241
+msgid "Delete this email definition"
+msgstr ""
+
+#: admin-templates/list-definitions.php:18
+#: admin-templates/settings.php:26
+#: includes/class-plugin.php:247
+#: includes/class-plugin.php:248
+msgid "Order Status Emails"
+msgstr ""
+
+#: admin-templates/list-definitions.php:31
+msgid "Add New"
+msgstr ""
+
+#: admin-templates/list-definitions.php:43
+msgid "Email definition saved."
+msgstr ""
+
+#: admin-templates/list-definitions.php:50
+msgid "Email definition deleted."
+msgstr ""
+
+#: admin-templates/list-definitions.php:59
+msgid "Send schedule:"
+msgstr ""
+
+#: admin-templates/list-definitions.php:67
+msgid "No email definitions configured yet."
+msgstr ""
+
+#: admin-templates/list-definitions.php:77
+msgid "Create your first email definition"
+msgstr ""
+
+#: admin-templates/list-definitions.php:88
+msgid "Actions"
+msgstr ""
+
+#: admin-templates/list-definitions.php:126
+msgid "Yes"
+msgstr ""
+
+#: admin-templates/list-definitions.php:127
+msgid "No"
+msgstr ""
+
+#: admin-templates/list-definitions.php:133
+msgid "Edit"
+msgstr ""
+
+#: admin-templates/list-definitions.php:135
+#: includes/class-settings.php:85
+msgid "Test"
+msgstr ""
+
+#: admin-templates/settings.php:34
+msgid "Settings saved."
+msgstr ""
+
+#: admin-templates/settings.php:55
+msgid "Send Schedule"
+msgstr ""
+
+#: admin-templates/settings.php:59
+msgid "Use these options to restrict when emails are sent. Emails that fall outside the schedule will simply be sent on the next eligible cron run."
+msgstr ""
+
+#: admin-templates/settings.php:68
+msgid "Time-of-Day Window"
+msgstr ""
+
+#: admin-templates/settings.php:73
+msgid "Only send emails within a specific time window"
+msgstr ""
+
+#: admin-templates/settings.php:81
+msgid "Window Times"
+msgstr ""
+
+#: admin-templates/settings.php:86
+msgid "to"
+msgstr ""
+
+#. translators: %s: server timezone name, e.g. "Europe/London".
+#: admin-templates/settings.php:93
+#, php-format
+msgid "Server timezone: %s. Emails due outside this window will be sent on the next cron run within the window."
+msgstr ""
+
+#: admin-templates/settings.php:103
+msgid "Allowed Days"
+msgstr ""
+
+#: admin-templates/settings.php:108
+msgid "Only send emails on specific days of the week"
+msgstr ""
+
+#: admin-templates/settings.php:114
+#: functions-private.php:89
+msgid "Mon"
+msgstr ""
+
+#: admin-templates/settings.php:115
+#: functions-private.php:90
+msgid "Tue"
+msgstr ""
+
+#: admin-templates/settings.php:116
+#: functions-private.php:91
+msgid "Wed"
+msgstr ""
+
+#: admin-templates/settings.php:117
+#: functions-private.php:92
+msgid "Thu"
+msgstr ""
+
+#: admin-templates/settings.php:118
+#: functions-private.php:93
+msgid "Fri"
+msgstr ""
+
+#: admin-templates/settings.php:119
+#: functions-private.php:94
+msgid "Sat"
+msgstr ""
+
+#: admin-templates/settings.php:120
+#: functions-private.php:95
+msgid "Sun"
+msgstr ""
+
+#: admin-templates/settings.php:126
+msgid "Send On"
+msgstr ""
+
+#: admin-templates/settings.php:142
+msgid "Emails due on excluded days will be sent on the next allowed day."
+msgstr ""
+
+#: admin-templates/settings.php:150
+msgid "Custom Meta Tokens"
+msgstr ""
+
+#: admin-templates/settings.php:158
+msgid "Order Meta Keys"
+msgstr ""
+
+#: admin-templates/settings.php:166
+msgid "One meta key per line. These become available as {{order.meta.KEY}} tokens in email templates."
+msgstr ""
+
+#: admin-templates/settings.php:174
+msgid "Customer Meta Keys"
+msgstr ""
+
+#: admin-templates/settings.php:182
+msgid "One meta key per line. These become available as {{customer.meta.KEY}} tokens in email templates."
+msgstr ""
+
+#: admin-templates/settings.php:183
+msgid "Note: Customer meta tokens will return empty for guest orders."
+msgstr ""
+
+#: admin-templates/settings.php:189
+msgid "Save Settings"
+msgstr ""
+
+#. translators: %s: email definition count.
+#: admin-templates/tab-navigation.php:21
+#, php-format
+msgid "Emails (%s)"
+msgstr ""
+
+#: admin-templates/tab-navigation.php:24
+#: includes/class-plugin.php:229
+msgid "Settings"
+msgstr ""
+
+#. translators: 1: email definition label, 2: recipient email address.
+#: includes/class-email-sender.php:271
+#, php-format
+msgid "Payment Email Notifications: \"%1$s\" sent to %2$s."
+msgstr ""
+
+#: includes/class-settings.php:83
+msgid "Enter the email address to send the test email to:"
+msgstr ""
+
+#: includes/class-settings.php:84
+msgid "Sending…"
+msgstr ""
+
+#: includes/class-settings.php:153
+#: includes/class-settings.php:216
+#: includes/class-settings.php:252
+msgid "Security check failed."
+msgstr ""
+
+#: includes/class-settings.php:157
+#: includes/class-settings.php:220
+#: includes/class-settings.php:256
+#: includes/class-settings.php:308
+msgid "Insufficient permissions."
+msgstr ""
+
+#: includes/class-settings.php:315
+msgid "Definition ID and recipient email are required."
+msgstr ""
+
+#: includes/class-settings.php:321
+msgid "Email definition not found."
+msgstr ""
+
+#: includes/class-settings.php:334
+msgid "No orders found in the system to use as sample data."
+msgstr ""
+
+#. translators: 1: recipient email address, 2: order ID.
+#: includes/class-settings.php:346
+#, php-format
+msgid "Test email sent to %1$s using order #%2$d."
+msgstr ""
+
+#: includes/class-settings.php:354
+msgid "Failed to send test email."
+msgstr ""
+
+#: includes/class-token-engine.php:163
+msgid "Customer first name"
+msgstr ""
+
+#: includes/class-token-engine.php:164
+msgid "Customer last name"
+msgstr ""
+
+#: includes/class-token-engine.php:165
+msgid "Customer full name"
+msgstr ""
+
+#: includes/class-token-engine.php:166
+msgid "Customer email address"
+msgstr ""
+
+#: includes/class-token-engine.php:167
+msgid "Customer company name"
+msgstr ""
+
+#: includes/class-token-engine.php:168
+msgid "Order number"
+msgstr ""
+
+#: includes/class-token-engine.php:169
+msgid "Formatted order total"
+msgstr ""
+
+#: includes/class-token-engine.php:170
+msgid "Order date"
+msgstr ""
+
+#: includes/class-token-engine.php:171
+msgid "Order items table (HTML)"
+msgstr ""
+
+#: includes/class-token-engine.php:172
+msgid "My Account order URL"
+msgstr ""
+
+#: includes/class-token-engine.php:173
+msgid "Checkout payment URL"
+msgstr ""
+
+#: includes/class-token-engine.php:174
+msgid "Order status label"
+msgstr ""
+
+#: includes/class-token-engine.php:175
+msgid "Payment method name"
+msgstr ""
+
+#: includes/class-token-engine.php:176
+msgid "Site name"
+msgstr ""
+
+#: includes/class-token-engine.php:177
+msgid "Site URL"
+msgstr ""
+
+#. translators: %s: meta key name.
+#: includes/class-token-engine.php:185
+#, php-format
+msgid "Order meta: %s"
+msgstr ""
+
+#. translators: %s: meta key name.
+#: includes/class-token-engine.php:193
+#, php-format
+msgid "Customer meta: %s"
+msgstr ""

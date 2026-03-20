@@ -1,10 +1,10 @@
-=== Payment Email Notifications ===
+=== Order Status Email Notifications ===
 Contributors: headwall
-Tags: woocommerce, email, notifications, payment, reminders
+Tags: woocommerce, email, notifications, order-status, reminders
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 0.2.1
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Send scheduled, WooCommerce-styled emails to customers based on how long an orde
 
 == Description ==
 
-Payment Email Notifications lets you create time-based email workflows triggered by WooCommerce order statuses. Define emails that send automatically when an order has been at a specific status for a configurable number of days.
+Order Status Email Notifications lets you create time-based email workflows triggered by WooCommerce order statuses. Define emails that send automatically when an order has been at a specific status for a configurable number of days.
 
 **Example use cases:**
 
@@ -36,7 +36,7 @@ Payment Email Notifications lets you create time-based email workflows triggered
 1. Upload the `payment-email-notifications` folder to `/wp-content/plugins/`
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Ensure WooCommerce is installed and active
-4. Navigate to WooCommerce → Payment Emails to configure your email definitions
+4. Navigate to WooCommerce → Order Status Emails to configure your email definitions
 
 == Frequently Asked Questions ==
 
@@ -61,6 +61,18 @@ Yes. Go to the Settings tab and add your order or customer meta keys (one per li
 Yes. Each email definition has its own subject and body with support for template tokens like `{{customer.first_name}}` and `{{order.total}}`. Developers can also use filters for advanced customisation.
 
 == Changelog ==
+
+= 1.0.0 =
+* Renamed plugin to Order Status Email Notifications
+* Added send schedule settings: time-of-day window and day-of-week restrictions
+* Added new tokens: `{{order.view_url}}`, `{{order.payment_url}}`, `{{order.status}}`
+* Added Settings link on the Plugins page
+* Added email definition count on Emails tab
+* Added send schedule summary notice on Emails list view
+* Added server timezone display on schedule settings
+* Added `.distignore` for clean distribution builds
+* Prefixed all admin template variables for Plugin Check compliance
+* Added text domain loading for translation support
 
 = 0.2.1 =
 * Added GitHub Actions release workflow for automated zip builds on version tags

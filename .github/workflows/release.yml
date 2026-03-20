@@ -60,7 +60,7 @@ jobs:
             build/payment-email-notifications-${{ steps.get_version.outputs.version }}.zip
             build/payment-email-notifications.zip
           body: |
-            **Payment Email Notifications v${{ steps.get_version.outputs.version }}**
+            **Order Status Email Notifications v${{ steps.get_version.outputs.version }}**
 
             Download the zip file and install via WordPress admin or upload to your plugins directory.
 
