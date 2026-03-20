@@ -29,6 +29,7 @@ Order Status Email Notifications lets you create time-based email workflows trig
 * Test email sending from the admin list view
 * Emails styled using the WooCommerce email template system
 * Hourly cron ensures emails are sent on schedule
+* Send schedule — optionally restrict sending to a time-of-day window and specific days of the week
 * Developer-friendly with filters for customisation
 
 == Installation ==
@@ -55,6 +56,10 @@ The plugin runs an hourly cron job that evaluates all orders against your email 
 = Can I include custom fields in my emails? =
 
 Yes. Go to the Settings tab and add your order or customer meta keys (one per line). They become available as `{{order.meta.KEY}}` and `{{customer.meta.KEY}}` tokens in your email templates. This works with any meta field including ACF fields.
+
+= Will this work for orders that existed before I installed the plugin? =
+
+No. The plugin tracks how long an order has been at a status by recording a timestamp when the status changes. Orders created before the plugin was activated don't have that timestamp, so they won't be eligible for reminder emails. Only orders created (or whose status changes) after activation will be tracked.
 
 = Can I customise the email content? =
 
